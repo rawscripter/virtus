@@ -1,0 +1,140 @@
+.index-page .section-components h6.description {
+    margin-top: 5px;
+    margin-bottom: 30px
+}
+
+.index-page .page-header {
+    height: 90vh;
+    overflow: hidden
+}
+
+.index-page .brand {
+    color: #fff;
+    text-align: center
+}
+
+.index-page .brand h1 {
+    font-size: 6rem;
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    line-height: 1.15em;
+    text-shadow: 0 15px 102.86px rgba(0,0,0,.7),0 15px 40.02px rgba(0,0,0,.21)
+}
+
+.index-page .brand h3 {
+    font-size: 2.23rem;
+    margin: 10px auto 0;
+    line-height: 0;
+    font-weight: 400;
+    text-shadow: 0 15px 102.86px rgba(0,0,0,.9),0 15px 40.02px rgba(0,0,0,.51)
+}
+
+.index-page h4.description {
+    font-size: 1.5em
+}
+
+.section {
+    padding: 70px 0
+}
+
+.landing-page .page-header:before {
+    background: rgba(0,0,0,.2)
+}
+
+
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: 0;
+    line-height: 1.25;
+    color: #2196f3;
+    background-color: transparent;
+    border: 0 solid #dee2e6
+}
+
+
+.home-title{
+    margin-top: 30px;
+    margin-bottom: 25px;
+    min-height: 32px;
+    color: #000;
+}
+.main {
+    background: #fff;
+    position: relative;
+    z-index: 3
+}
+
+.main-raised {
+    margin: -60px 30px 0;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
+    box-shadow: 0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2)
+}
+
+.md-layout-item {
+    padding-right: 15px;
+    padding-left: 15px
+}
+.container,.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative
+}
+
+.section .container,.section .container-fluid {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.md-ripple .md-ripple-wave {
+    border-radius: 50%!important
+}
+
+.small,small {
+    font-size: 75%;
+    color: #777;
+    font-weight: 400
+}
+
+.ml-auto,.mx-auto {
+    margin-left: auto!important
+}
+
+.mr-auto,.mx-auto {
+    margin-right: auto!important
+}
+
+.md-layout {
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+
+.main-container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.padding-main{
+    padding: 10px;
+}
+
+.navbar-vig-color {
+    background-color: #039be5 !important;
+
+}
