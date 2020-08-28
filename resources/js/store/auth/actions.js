@@ -6,7 +6,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
-    baseUrl: 'http://virtus.test/api/v1/',
+    baseUrl: 'api/v1/',
     tokenName: "access_token",
     loginUrl: "users/user/login",
     registerUrl: "users/user/register"
@@ -16,20 +16,20 @@ const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
 export default {
     login(context, payload) {
         return vueAuth.login(payload.user, payload.requestOptions).then(response => {
-         let tokenData= response.data.data
+         let tokenData= response.data.data;
             if (tokenData.access_token) {
-              localStorage.setItem('access_token', tokenData.access_token)
+              localStorage.setItem('access_token', tokenData.access_token);
                 context.commit("isAuthenticated", {
                     isAuthenticated: true
                 });
-                context.commit('AUTH_ID', tokenData.user.id)
+                context.commit('AUTH_ID', tokenData.user.id);
             }
             router.push({name: "Home"});
         });
     },
 
     register(context, payload) {
-        console.log(payload)
+        console.log(payload);
         return vueAuth.register(payload.user, payload.requestOptions).then(response => {
             context.commit("isAuthenticated", {
                 isAuthenticated: vueAuth.isAuthenticated()
@@ -43,8 +43,8 @@ export default {
             context.commit("isAuthenticated", {
                 isAuthenticated: vueAuth.isAuthenticated()
             });
-            context.commit('AUTH_ID', null)
+            context.commit('AUTH_ID', null);
             router.push({name: "Login"});
         });
     }
-}
+};

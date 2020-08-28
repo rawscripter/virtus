@@ -1,8 +1,8 @@
-import App from './App.vue'
-import router from './router/index'
-import store from './store/index'
-import Vue from 'vue'
-import moment from 'vue-moment'
+import App from './App.vue';
+import router from './router/index';
+import store from './store/index';
+import Vue from 'vue';
+import moment from 'vue-moment';
 import Chartist from "chartist";
 import VueAxios from "vue-axios";
 import DashboardPlugin from "./material-dashboard";
@@ -26,7 +26,7 @@ Vue.use(VueAxios, axios);
 Vue.use(moment);
 Vue.use(VueGoodWizard);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true;
 
 // global library setup
 Vue.prototype.$Chartist = Chartist;
@@ -38,6 +38,6 @@ const app = new Vue({
     store: store,
     el: "#app",
     render: h => h(App),
-})
+});
 
 store.$app = app;
