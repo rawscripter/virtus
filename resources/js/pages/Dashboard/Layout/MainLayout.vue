@@ -60,53 +60,17 @@
                         <router-view></router-view>
                     </zoom-center-transition>
                 </div>
-                <footer class="footer">
-                    <div class="container md-offset">
-                        <nav>
-                            <ul>
-                                <li>
-                                    <a href="https://www.creative-tim.com" target="_blank">
-                                        Creative Tim
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.updivision.com/" target="_blank">
-                                        UPDIVISION
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://creative-tim.com/presentation" target="_blank">
-                                        About Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://blog.creative-tim.com" target="_blank">
-                                        Blog
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.creative-tim.com/license" target="_blank">
-                                        Licenses
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright text-center">
-                            &copy; {{ new Date().getFullYear() }},
-                            made with <i class="fa fa-heart heart"></i>
-                            by
-                            <a href="https://www.creative-tim.com/?ref=mdp-vuejs-api" target="_blank">Creative Tim</a>
-                            and
-                            <a href="https://www.updivision.com/?ref=mdp-vuejs-api" target="_blank">UPDIVISION</a>
-                            for a better web.
-                        </div>
-                    </div>
-                </footer>
+                <content-footer></content-footer>
             </div>
         </div>
     </div>
 </template>
+
+
+
 <script>
+
+import ContentFooter from "./ContentFooter";
 export default {
     props: {
         backgroundColor: {
@@ -119,6 +83,11 @@ export default {
             default: true
         }
     },
+
+    components:{
+        ContentFooter
+    },
+
     data() {
         return {
             responsive: false,
@@ -131,8 +100,8 @@ export default {
     computed: {
         setBgImage() {
             let images = {
-                Login: process.env.VUE_APP_APP_BASE_URL + "/img/login.jpg",
-                Register: process.env.VUE_APP_APP_BASE_URL + "/img/register.jpg",
+                Login: process.env.APP_URL + "/images/login.jpg",
+                Register: process.env.APP_URL + "/images/register.jpg",
             };
             return {
                 backgroundImage: `url(${images[this.$route.name]})`

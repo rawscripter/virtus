@@ -16,8 +16,21 @@ export default {
         });
     },
 
+    getAllCampaigns(){
+        console.log('making api call');
+        Client.get('/campaign/all').then(function (response) {
+            console.log(response);
+            if(response.data!="") {
+                context.commit('CAMPAIGN', response.data);
+            }else{
+                console.log("response data empty");
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
     getCampaignById (context, id) {
-        console.log(id);
         Client.get('/campaign/id?id='+id).then(function (response) {
             if(response.data!="") {
                 context.commit('CAMPAIGN', response.data);
@@ -34,11 +47,8 @@ export default {
     },
 
     searchContactByOwner (context,payload) {
-        console.log('search');
         Client.get('campaign/contacts/search/owner?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
-            console.log(response);
             if(response.data!="") {
-                console.log(response.data);
                 context.commit('SET_CAMPAIGN_CONTACTS', response.data);
             }else{
                 console.log("response data empty");
@@ -50,11 +60,8 @@ export default {
 
 
     searchContactByAddress (context,payload) {
-        console.log('search');
         Client.get('campaign/contacts/search/address?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
-            console.log(response);
             if(response.data!="") {
-                console.log(response.data);
                 context.commit('SET_CAMPAIGN_CONTACTS', response.data);
             }else{
                 console.log("response data empty");
@@ -67,7 +74,6 @@ export default {
 
 
     getCampaignContact(context, id) {
-
         Client.get('campaign/contact/search/id?id='+id).then(function (response) {
             if(response){
                 console.log(response.data);
@@ -97,13 +103,11 @@ export default {
         */
         Client.post( 'campaign/create', data
         ).then(function(response){
-            console.log(response);
             this.$router.push({name: 'campaigns'});
             context.commit('CAMPAIGN_LOADED', true);
 
         }.bind(this))
             .catch(function(response){
-                console.log(response);
                 context.commit('CAMPAIGN_LOADED', true);
             });
     },
@@ -112,16 +116,13 @@ export default {
         /*
           Make the request to the POST /single-file URL
         */
-        console.log('in service'+ data);
         Client.post( 'campaign/type/create', data
         ).then(function(response){
-            console.log(response);
             this.$router.push({name: 'admin'});
             context.commit('CAMPAIGN_TYPE_LOADED', true);
 
         }.bind(this))
             .catch(function(response){
-                console.log(response);
                 context.commit('CAMPAIGN_TYPE_LOADED', true);
             });
     },

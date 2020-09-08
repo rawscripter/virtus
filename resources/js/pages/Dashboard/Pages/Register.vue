@@ -86,7 +86,7 @@
                     <md-checkbox v-model="boolean">I agree to the <a>terms and conditions</a>.</md-checkbox>
 
                     <div class="button-container">
-                        <md-button class="md-success md-round mt-4" @click="register" slot="footer">
+                        <md-button class="md-success md-round mt-4" @click="register" slot="footer" disabled>
                             Get Started
                         </md-button>
                     </div>
@@ -107,6 +107,7 @@ export default {
     mixins: [formMixin],
     data() {
         return {
+            enableRegistration:false,
             username: null,
             first_name: null,
             last_name: null,
@@ -145,34 +146,35 @@ export default {
 
     methods: {
         async register() {
-
-            if(!this.boolean) {
-                await this.$store.dispatch("alerts/error", "You need to agree with our terms and conditions.")
-                return
-            }
-
-            const user = {
-                username: this.username,
-                first_name: this.first_name,
-                last_name: this.last_name,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation
-            };
-
-            const requestOptions = {
-                headers: {
-                    'Accept': 'application/vnd.api+json',
-                    'Content-Type': 'application/vnd.api+json',
+            if(this.enableRegistration) {
+                if (!this.boolean) {
+                    await this.$store.dispatch("alerts/error", "You need to agree with our terms and conditions.")
+                    return
                 }
-            }
 
-            try {
-                await this.$store.dispatch("register", {user, requestOptions})
-                await this.$store.dispatch("alerts/success", "Successfully registered.")
-            } catch (e) {
-                await this.$store.dispatch("alerts/error", "Oops, something went wrong")
-                this.setApiValidation(e.response.data.errors)
+                const user = {
+                    username: this.username,
+                    first_name: this.first_name,
+                    last_name: this.last_name,
+                    email: this.email,
+                    password: this.password,
+                    password_confirmation: this.password_confirmation
+                };
+
+                const requestOptions = {
+                    headers: {
+                        'Accept': 'application/vnd.api+json',
+                        'Content-Type': 'application/vnd.api+json',
+                    }
+                }
+
+                try {
+                    await this.$store.dispatch("register", {user, requestOptions})
+                    await this.$store.dispatch("alerts/success", "Successfully registered.")
+                } catch (e) {
+                    await this.$store.dispatch("alerts/error", "Oops, something went wrong")
+                    this.setApiValidation(e.response.data.errors)
+                }
             }
         }
     }

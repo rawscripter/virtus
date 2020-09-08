@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Events\SearchEvent;
+use App\Http\Resources\CampaignListResource;
 use App\Http\Resources\PropertyAddressResource;
 use App\Http\Resources\CampaignResource;
 use App\Http\Resources\OwnerResource;
@@ -21,14 +22,14 @@ class CampaignController extends Controller
 
     public function index()
     {
-        return CampaignResource::collection(Owner::all())->response();
+        return CampaignListResource::collection(Campaign::all())->response();
     }
 
     public function recent()
     {
         $results = Owner::orderBy('updated_at')->get();
         Log::info($results);
-       return CampaignResource::collection($results);
+       return OwnerResource::collection($results);
     }
 
 

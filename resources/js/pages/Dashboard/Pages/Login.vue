@@ -3,9 +3,8 @@
 
         <div class="md-layout-item md-size-100">
             <div class="text-center">
-                <h3>Log in to Vue Material Dashboard Laravel Live Preview</h3>
+                <h3>Log in to Virtus Investment Group LLC</h3>
                 <p>
-                    Log in to see how you can go from frontend to fullstack in an instant with an API-based Laravel backend.
                 </p>
             </div>
         </div>
@@ -46,6 +45,7 @@
 import {LoginCard, ValidationError} from "@/components";
 import formMixin from "@/mixins/form-mixin";
 import store from "../../../store";
+const Quote = require('inspirational-quotes');
 
 export default {
     components: {
@@ -58,10 +58,17 @@ export default {
         }
     },
     data: () => ({
-        email: "blackheart1286",
-        password: "password?1"
+        email: "",
+        password: "",
     }),
     methods: {
+
+        getQuote(){
+            console.log(Quote.getRandomQuote())
+        return Quote.getRandomQuote();
+
+        },
+
         async login() {
             const user = {
                 username: this.email,

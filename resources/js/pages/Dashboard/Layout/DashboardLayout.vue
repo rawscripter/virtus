@@ -135,10 +135,10 @@ export default {
         return {
             sidebarBackgroundColor: "black",
             sidebarBackground: "green",
-            sidebarBackgroundImage: process.env.VUE_APP_APP_BASE_URL + "/img/sidebar-2.jpg",
+            sidebarBackgroundImage: process.env.APP_URL + "/images/sidebar-2.jpg",
             sidebarMini: true,
             sidebarImg: true,
-            image: process.env.VUE_APP_APP_BASE_URL + '/img/laravel-vue.svg'
+            image: process.env.APP_URL + '/images/laravel-vue.svg'
         };
     },
     methods: {

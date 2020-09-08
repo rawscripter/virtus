@@ -29,7 +29,6 @@ export default {
     },
 
     register(context, payload) {
-        console.log(payload);
         return vueAuth.register(payload.user, payload.requestOptions).then(response => {
             context.commit("isAuthenticated", {
                 isAuthenticated: vueAuth.isAuthenticated()

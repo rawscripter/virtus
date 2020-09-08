@@ -35,7 +35,7 @@
           </button>
         </div>
       </form>
-      <div class="contact100-more flex-col-c-m" style="background-image: url('../assets/images/bgr.jpg');">
+      <div class="contact100-more flex-col-c-m" style="background-image: url('@/assets/images/bgr.jpg');">
 
         <div class="dis-flex size1 p-b-47">
           <div class="txt1 p-r-25">

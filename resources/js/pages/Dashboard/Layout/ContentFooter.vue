@@ -4,7 +4,7 @@
       <nav>
         <ul>
           <li>
-            <a v-if="$route.meta.rtlActive" href="https://www.creative-tim.com" target="_blank">
+            <a v-if="$route.meta.rtlActive" href="https://virtusinvestmentgroup.com" target="_blank">
               منزل
             </a>
             <a v-else href="https://virtusinvestmentgroup.com" target="_blank">

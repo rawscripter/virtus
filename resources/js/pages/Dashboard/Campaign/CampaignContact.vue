@@ -65,7 +65,7 @@
 
                     </stats-card>
                 </md-card-header>
-                <md-card-content v-for="phones in activeContact.phones">
+                <md-card-content v-for="phones in activeContact.phones"  :key="phones.id">
                     <md-field v-for="(index, key) in phones" :key="index.phone + key">
                         <label>Phone {{key +1}}</label>
                         <md-input :value="index.phone" readonly></md-input>
@@ -90,22 +90,32 @@
                     </stats-card>
                 </md-card-header>
 
-                <md-card v-for="properties in activeContact.addresses" >
+
+
+                <md-card v-for="properties in activeContact.addresses" :key="properties.id">
                     <md-card-header class="md-card-header-text md-card-header-warning">
                         <div class="card-text">
                             <p class="category">
-                                <md-button class="md-raised md-success">Property</md-button>zz
-                                <md-button class="md-raised md-primary">Details</md-button>
-                                <md-button class="md-raised md-info">Owners</md-button>
+                                <md-button class="md-raised md-success">{{ properties[0]['full_address'] }}</md-button>
+
+                                 <a :href="getZlink(properties[0]['full_address'])" target="_blank">View On Zillow</a>
                             </p>
                         </div>
                     </md-card-header>
+                <md-card-expand>
+                    <md-card-actions>
+                        <md-card-expand-trigger>
+                            <md-button class="md-icon-button">
+                                <md-icon>keyboard_arrow_down</md-icon>
+                            </md-button>
+                        </md-card-expand-trigger>
 
-                    <md-card-content>
-                        <md-table table-header-color="orange" >
-                            <md-table-row slot="md-table-row" v-for="property in properties">
-                                <md-table-cell md-label="Name">{{property.full_address }}</md-table-cell>
-                                <md-table-cell md-label="Name">  <a :href="getZlink(property.full_address)" target="_blank">View On Zillow</a></md-table-cell>
+                       <md-card-expand-content>
+                            <md-table table-header-color="orange" >
+                                <span v-for="property in properties" :key="property.id">
+
+                          <md-table-row slot="md-table-row">
+                                <md-table-cell md-label="Name">{{property.details[0]['details'] }}</md-table-cell>
                                 <md-button class="md-just-icon md-simple md-primary">
                                     <md-icon>edit</md-icon>
                                     <md-tooltip md-direction="top">Edit</md-tooltip>
@@ -115,10 +125,30 @@
                                     <md-tooltip md-direction="top">Close</md-tooltip>
                                 </md-button>
                             </md-table-row>
+
+
+
+                           <md-table-row slot="md-table-row">
+                                <md-table-cell md-label="Name" v-for="owner in property.owners" :key="owner.id">{{owner.first_name}} {{owner.last_name}}</md-table-cell>
+                                <md-button class="md-just-icon md-simple md-primary">
+                                    <md-icon>edit</md-icon>
+                                    <md-tooltip md-direction="top">Edit</md-tooltip>
+                                </md-button>
+                                <md-button class="md-just-icon md-simple md-danger">
+                                    <md-icon>close</md-icon>
+                                    <md-tooltip md-direction="top">Close</md-tooltip>
+                                </md-button>
+                            </md-table-row>
+                            </span>
                         </md-table>
-                    </md-card-content>
+                    </md-card-expand-content>
+
+                </md-card-actions>
+
+                </md-card-expand>
                 </md-card>
             </md-card>
+
             <md-card class="md-primary" md-theme="black-card">
                 <md-card-area>
                     map goes here
@@ -238,6 +268,7 @@ export default {
     },
     data(){
         return {
+            infoTab:1,
             leadStatus:[
                 {status:'Active'},
                 {status:'Dead'},
@@ -265,18 +296,9 @@ export default {
         selectProperty(){
             console.log('test')
         },
-        onChange(tabIndex) {
-            console.log(tabIndex)
-            switch (tabIndex) {
-                case 0:
-                    this.activeTab=0;
-                    console.log('0')
-                    break;
-                case 1:
-                    this.activeTab=1;
-                    console.log('1')
-                    break;
-            }
+
+        onTabChange(tabIndex) {
+       this.infoTab=tabIndex
         },
 
     },

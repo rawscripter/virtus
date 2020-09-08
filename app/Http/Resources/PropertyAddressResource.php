@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class PropertyAddressResource extends JsonResource
 {
@@ -23,7 +24,7 @@ class PropertyAddressResource extends JsonResource
                 'state'=>$this->property_state,
                 'zip'=>$this->property_zip,
                 'details'=> new PropertyDetailResource($this->details),
-                'owners' =>  OwnerResource::collection($this->owners),
+                'owners' =>  $this->owners,
                 'created' => $this->created_at,
                 'updated' => $this->updated_at
             ],

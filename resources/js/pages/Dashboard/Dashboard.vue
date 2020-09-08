@@ -1,20 +1,20 @@
-<template>
+z4<template>
   <div class="md-layout">
     <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
 
       <stats-card header-color="blue">
         <template slot="header">
           <div class="card-icon">
-            <i class="fab fa-twitter"></i>
+              <md-icon>whatshot</md-icon>
           </div>
-          <p class="category">Folowers</p>
+          <p class="category">Projected Leads Revenue</p>
           <h3 class="title">
-            +245
+            $115,000.56
           </h3>
         </template>
 
         <template slot="footer">
-          <div class="stats">
+          <div class="whatshot">
             <md-icon>update</md-icon>
             Just Updated
           </div>
@@ -27,16 +27,16 @@
           <div class="card-icon">
             <md-icon>equalizer</md-icon>
           </div>
-          <p class="category">Website Visits</p>
+          <p class="category">Monthly Leads Acquired</p>
           <h3 class="title">
-            75.521
+            5
           </h3>
         </template>
 
         <template slot="footer">
           <div class="stats">
             <md-icon>local_offer</md-icon>
-            Tracked from Google Analytics
+           Tracked From Leads Entry
           </div>
         </template>
       </stats-card>
@@ -47,16 +47,15 @@
           <div class="card-icon">
             <md-icon>store</md-icon>
           </div>
-          <p class="category">Revenue</p>
+          <p class="category">Actual Closed Revenue</p>
           <h3 class="title">
-            $ 34.245
+            $ 55,000.24
           </h3>
         </template>
 
         <template slot="footer">
           <div class="stats">
-            <md-icon>date_range</md-icon>
-            Last 24 Hours
+            <md-icon>date_range</md-icon>This Month
           </div>
         </template>
       </stats-card>
@@ -67,16 +66,16 @@
           <div class="card-icon">
             <md-icon>weekend</md-icon>
           </div>
-          <p class="category">Bookings</p>
+          <p class="category">Schedule Cosings</p>
           <h3 class="title">
-            184
+           5
           </h3>
         </template>
 
         <template slot="footer">
           <div class="stats">
             <md-icon class="text-danger">warning</md-icon>
-            <a href="#pablo">Get More Space...</a>
+            <a href="#pablo">Still Below Closing Threshold</a>
           </div>
         </template>
       </stats-card>
@@ -103,9 +102,9 @@
         </md-button>
 
         <template slot="content">
-          <h4 class="title">Website Views</h4>
+          <h4 class="title">Monthly Lead Tracker</h4>
           <p class="category">
-            Last Campaign Performance
+            Latest Acquisition Performance
           </p>
         </template>
 
@@ -137,13 +136,13 @@
         </md-button>
 
         <template slot="content">
-          <h4 class="title">Daily Sales</h4>
+          <h4 class="title">Daily Leads</h4>
           <p class="category">
             <span class="text-success"
               ><i class="fas fa-long-arrow-alt-up"></i>
-              55%
+              15%
             </span>
-            increase in today sales.
+            increase in today Leads.
           </p>
         </template>
 
@@ -175,7 +174,7 @@
         </md-button>
 
         <template slot="content">
-          <h4 class="title">Completed Tasks</h4>
+          <h4 class="title">Leads Added Today</h4>
           <p class="category">
             Last Campaign Performance
           </p>
@@ -202,13 +201,10 @@
         </md-card-header>
         <md-card-content>
           <md-table v-model="recentLeads" table-header-color="orange">
-              {{recentLeads}}
-              <!--<md-table-row slot="md-table-row" slot-scope="{ item }">
-              <md-table-cell md-label="Id">{{ item.id }}</md-table-cell>
-              <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-              <md-table-cell md-label="Salary">{{ item.salary }}</md-table-cell>
-              <md-table-cell md-label="Country">{{ item.country }}</md-table-cell>
-            </md-table-row> -->
+             <md-table-row v-for="lead in recentLeads.data"  :key="lead.id">
+                 <md-table-cell md-label="Id">{{ lead.contact.first_name }}</md-table-cell>
+              <md-table-cell md-label="Name">{{ lead.contact.last_name }}</md-table-cell>
+            </md-table-row>
           </md-table>
         </md-card-content>
       </md-card>
@@ -219,7 +215,7 @@
         <template slot="content">
           <span class="md-nav-tabs-title">Tasks</span>
           <md-tabs md-sync-route class="md-rose" md-alignment="left">
-            <md-tab id="tab-home" md-label="Bugs" md-icon="bug_report">
+            <md-tab id="tab-home" md-label="" md-icon="fast_check">
               <md-table v-model="firstTabs" @md-selected="onSelect">
                 <md-table-row
                     slot="md-table-row"
@@ -241,53 +237,6 @@
                 </md-table-row>
               </md-table>
             </md-tab>
-
-            <md-tab id="tab-pages" md-label="Website" md-icon="code">
-              <md-table v-model="secondTabs" @md-selected="onSelect">
-                <md-table-row
-                    slot="md-table-row"
-                    slot-scope="{ item }"
-                    md-selectable="multiple"
-                    md-auto-select
-                >
-                  <md-table-cell>{{ item.tab }}</md-table-cell>
-                  <md-table-cell>
-                    <md-button class="md-just-icon md-simple md-primary">
-                      <md-icon>edit</md-icon>
-                      <md-tooltip md-direction="top">Edit</md-tooltip>
-                    </md-button>
-                    <md-button class="md-just-icon md-simple md-danger">
-                      <md-icon>close</md-icon>
-                      <md-tooltip md-direction="top">Close</md-tooltip>
-                    </md-button>
-                  </md-table-cell>
-                </md-table-row>
-              </md-table>
-            </md-tab>
-
-            <md-tab id="tab-posts" md-label="Server" md-icon="cloud">
-              <md-table v-model="thirdTabs" @md-selected="onSelect">
-                <md-table-row
-                    slot="md-table-row"
-                    slot-scope="{ item }"
-                    md-selectable="multiple"
-                    md-auto-select
-                >
-                  <md-table-cell>{{ item.tab }}</md-table-cell>
-                  <md-table-cell>
-                    <md-button class="md-just-icon md-simple md-primary">
-                      <md-icon>edit</md-icon>
-                      <md-tooltip md-direction="top">Edit</md-tooltip>
-                    </md-button>
-                    <md-button class="md-just-icon md-simple md-danger">
-                      <md-icon>close</md-icon>
-                      <md-tooltip md-direction="top">Close</md-tooltip>
-                    </md-button>
-                  </md-table-cell>
-                </md-table-row>
-              </md-table>
-            </md-tab>
-
           </md-tabs>
         </template>
       </nav-tabs-card>
@@ -329,34 +278,10 @@ export default {
 
       selected: [],
       firstTabs: [
-        { tab: "Sign contract for \"What are conference organizers afraid of?\""},
-        { tab: "Lines From Great Russian Literature? Or E-mails From My Boss?" },
-        { tab: "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit" },
-        { tab: "Create 4 Invisible User Experiences you Never Knew About" }
-      ],
-      secondTabs: [
-        {
-          tab:
-            "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit"
-        },
-        {
-          tab:
-            "Sign contract for \"What are conference organizers afraid of?\""
-        }
-      ],
-      thirdTabs: [
-        {
-          tab:
-            "Lines From Great Russian Literature? Or E-mails From My Boss?"
-        },
-        {
-          tab:
-            "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit"
-        },
-        {
-          tab:
-            "Sign contract for \"What are conference organizers afraid of?\""
-        }
+        { tab: "Sign contract for 125 N Main St in Durham"},
+        { tab: "Call Mr. Grey about selling 14 N. Driver In Durham" },
+        { tab: "Update Revenue after closing today" },
+        { tab: "Team Meeting at 2PM Monday to discuss next Quarter Goals" }
       ],
 
       users: [
@@ -388,14 +313,14 @@ export default {
       dailySalesChart: {
         data: {
           labels: ["M", "T", "W", "T", "F", "S", "S"],
-          series: [[12, 17, 7, 17, 23, 18, 38]]
+          series: [[7, 10, 9, 4, 8444444444, 1, 0]]
         },
         options: {
           lineSmooth: this.$Chartist.Interpolation.cardinal({
             tension: 0
           }),
           low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 15, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: {
             top: 0,
             right: 0,
@@ -406,8 +331,8 @@ export default {
       },
       dataCompletedTasksChart: {
         data: {
-          labels: ["12am", "3pm", "6pm", "9pm", "12pm", "3am", "6am", "9am"],
-          series: [[230, 750, 450, 300, 280, 240, 200, 190]]
+          labels: ["9am", "10pm", "11pm", "1pm", "2pm", "3pm", "4pm", "5pm"],
+          series: [[0, 2, 3, 0, 0, 2, 0, 3]]
         },
 
         options: {
@@ -415,7 +340,7 @@ export default {
             tension: 0
           }),
           low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 20, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
           chartPadding: {
             top: 0,
             right: 0,
@@ -440,14 +365,14 @@ export default {
             "No",
             "De"
           ],
-          series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
+          series: [[60, 100, 55, 75, 35, 105, 85, 65, 75, 55, 48, 29]]
         },
         options: {
           axisX: {
             showGrid: false
           },
           low: 0,
-          high: 1000,
+          high: 200,
           chartPadding: {
             top: 0,
             right: 5,

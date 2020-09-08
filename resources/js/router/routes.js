@@ -134,7 +134,7 @@ let campaignMenu = {
             meta: { middleware: auth }
         },
     ]
-}
+};
 
 let adminMenu = {
     path: "/admin",
@@ -195,7 +195,7 @@ let mainpages = {
             meta: {middleware: guest}
         }
     ]
-}
+};
 const routes = [
     {
         path: "/",

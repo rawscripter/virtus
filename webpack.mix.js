@@ -18,7 +18,7 @@ mix.js('resources/js/app.js', 'public/js')
     });
 
 mix.browserSync({
-  //  proxy:'',
+    proxy:'localhost',
 });
 
 mix.alias({

@@ -25,8 +25,7 @@ Vue.use(VueAxios, axios);
 
 Vue.use(moment);
 Vue.use(VueGoodWizard);
-
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 
 // global library setup
 Vue.prototype.$Chartist = Chartist;

@@ -7,12 +7,12 @@
     :style="sidebarStyle"
   >
     <div class="logo">
-      <a href="https://www.creative-tim.com" class="simple-text logo-mini" target="_blank">
+      <a href="@assets/images/logo" class="simple-text logo-mini" target="_blank">
         <div style="padding: 4px 0;">
-          CT
+         VIG
         </div>
       </a>
-      <a href="https://www.creative-tim.com" class="simple-text logo-normal" target="_blank">
+      <a href="https://www.virtusinvestmentgroup.com" class="simple-text logo-normal" target="_blank">
         <template v-if="$route.meta.rtlActive">{{ rtlTitle }}</template>
         <template v-else>{{ title }}</template>
       </a>
@@ -59,7 +59,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Creative Tim"
+      default: "Virtus Investment Group, LLC"
     },
     rtlTitle: {
       type: String,

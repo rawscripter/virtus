@@ -144,7 +144,6 @@ export default {
 
     watch :{
         campaignContacts: function (e) {
-            console.log('in watch')
             if (e.meta.currentPage == this.pagination.currentPage)
             {
                 this.pagination.currentPage = e.meta.currentPage
@@ -164,20 +163,9 @@ export default {
         },
     },
 
-    async created() {
-        await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
-        window.Echo.channel('search')
-            .listen('.searchResults', (e) => {
-                console.log('results listening' + e)
-                this.$store.commit('SET_CAMPAIGN_CONTACTS', e.campaignContacts)
-            })
-
-    },
-
     methods: {
 
         getList(data) {
-        console.log(data)
             let dataArr = []
             data.forEach(function (item){
                 dataArr.push(item)
@@ -206,7 +194,17 @@ export default {
 
     },
 
+    async created() {
 
+        await  this.$store.dispatch("getAllCampaigns");
+        await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
+        window.Echo.channel('search')
+            .listen('.searchResults', (e) => {
+                console.log('results listening' + e)
+                this.$store.commit('SET_CAMPAIGN_CONTACTS', e.campaignContacts)
+            })
+
+    },
 }
 
 </script>
