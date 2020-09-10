@@ -11,6 +11,7 @@ use App\Models\PropertyAddress;
 use App\Models\Campaign;
 use App\Models\Owner;
 use App\Models\Phone;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -38,12 +39,26 @@ class CampaignController extends Controller
         return response(Campaign::all());
     }
 
+
+    public function searchByCampaign(Request $request)
+    {
+        $queryStr = $request->query('query');
+        $perPage = $request->query('perPage');
+        $page = $request->query('page');
+        $campaignContact = Owner::whereHas('campaigns', function (Builder $query) use ($queryStr){
+                $query->where('name', 'like', '%'. $queryStr. '%');
+
+            })
+            ->paginate($perPage)
+            ->appends($page);
+        return OwnerResource::collection($campaignContact);
+    }
+
     public function searchByOwner(Request $request)
     {
         $query = $request->query('query');
         $perPage = $request->query('perPage');
         $page = $request->query('page');
-
         $campaignContact = Owner::where('first_name', 'like', '%' . $query . '%')
             ->orWhere('last_name', 'like', '%' . $query . '%')
             ->paginate($perPage)

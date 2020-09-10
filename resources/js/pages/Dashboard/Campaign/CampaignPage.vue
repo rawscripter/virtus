@@ -1,4 +1,5 @@
 <template>
+
     <div class="md-layout">
         <div class="md-layout-item md-size-100">
             <md-card>
@@ -15,46 +16,75 @@
                             Add Campaign
                         </md-button>
                     </div>
-          `          <md-table
-                        :value="table"
-                        :md-sort.sync="sortation.field"
-                        :md-sort-order.sync="sortation.order"
-                        :md-sort-fn="customSort"
-                        class="paginated-table table-striped table-hover"
-                    >
-                        <md-table-toolbar>
+                    <div class="md-layout">
+                        <div class="md-layout-item md-size-20">
+                            <md-table
+                                :value="campaigns.data"
+                                :md-sort.sync="sortation.field"
+                                :md-sort-order.sync="sortation.order"
+                                :md-sort-fn="customSort"
+                                class="paginated-table table-striped table-hover"
+                            >
 
-                            <md-field>
-                                <label>Per page</label>
-                                <md-select v-model="pagination.perPage" name="pages">
-                                    <md-option
-                                        v-for="item in pagination.perPageOptions"
-                                        :key="item"
-                                        :label="item"
-                                        :value="item"
-                                    >
-                                        {{ item }}
-                                    </md-option>
-                                </md-select>
-                            </md-field>
+                                <md-table-row slot="md-table-row" slot-scope="{ item}">
+                                    <md-table-cell md-label="Campaign" md-sort-by="name">{{item.name}}</md-table-cell>
+                                    <md-table-cell md-label="Actions">
+                                        <md-button class="md-icon-button md-raised md-round md-info" @click="getCampaignList(item)" style="margin: .2rem;">
+                                            <md-icon>play_arrow</md-icon>
+                                        </md-button>
+                                    </md-table-cell>
+                                </md-table-row>
+                            </md-table>
+                        </div>
+                        <div class="md-layout-item md-size-75">
+                            <div v-if="table.length>0">
+                            <md-table
+                                :value="table"
+                                :md-sort.sync="sortation.field"
+                                :md-sort-order.sync="sortation.order"
+                                :md-sort-fn="customSort"
+                                class="paginated-table table-striped table-hover"
+                            >
+                                <md-table-toolbar>
 
-                        </md-table-toolbar>
+                                    <md-field>
+                                        <label>Per page</label>
+                                        <md-select v-model="pagination.perPage" name="pages">
+                                            <md-option
+                                                v-for="item in pagination.perPageOptions"
+                                                :key="item"
+                                                :label="item"
+                                                :value="item"
+                                            >
+                                                {{ item }}
+                                            </md-option>
+                                        </md-select>
+                                    </md-field>
 
-                        <md-table-row slot="md-table-row" slot-scope="{ item}">
-                            <md-table-cell md-label="First Name" md-sort-by="first_name">{{item.contact.first_name}}</md-table-cell>
-                            <md-table-cell md-label="Last Name" md-sort-by="last_name">{{item.contact.last_name}}</md-table-cell>
-                            <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
-                            <md-table-cell md-label="Actions">
-                                <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
-                                    <md-icon>edit</md-icon>
-                                </md-button>
-                                <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
-                                    <md-icon>delete</md-icon>
-                                </md-button>
-                            </md-table-cell>
-                        </md-table-row>
-                    </md-table>
+                                </md-table-toolbar>
 
+                                <md-table-row slot="md-table-row" slot-scope="{ item}">
+                                    <md-table-cell md-label="First Name" md-sort-by="first_name">{{item.contact.first_name}}</md-table-cell>
+                                    <md-table-cell md-label="Last Name" md-sort-by="last_name">{{item.contact.last_name}}</md-table-cell>
+                                    <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
+                                    <md-table-cell md-label="Actions">
+                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
+                                            <md-icon>edit</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>delete</md-icon>
+                                        </md-button>
+                                    </md-table-cell>
+                                </md-table-row>
+                            </md-table>
+                                </div>
+                            <div v-else>
+                             <h3>
+                                 <strong>{{activeCampaign}}  Has No Leads</strong>
+                             </h3>
+                            </div>
+                        </div>
+                    </div>
                     <div class="footer-table md-table">
                         <table>
                             <tfoot>
@@ -90,6 +120,7 @@
             </md-card>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -103,9 +134,14 @@ export default {
     components: {
         "pagination": Pagination
     },
-
+    watcher:{
+       campaigns: function (){
+           console.log('updated')
+       }
+    },
     data: () => ({
         table: [],
+        activeCampaign:'',
         footerTable: ["Name", "Email", "Created At", "Actions"],
 
         query: null,
@@ -130,6 +166,7 @@ export default {
     computed: {
         ...mapGetters({
             campaignContacts: 'campaignContacts',
+            campaigns:'campaigns'
         }),
 
         sort() {
@@ -173,6 +210,11 @@ export default {
             this.table = dataArr
         },
 
+        getCampaignList(data) {
+            this.activeCampaign = data.name
+            this.updateData();
+        },
+
         onProFeature() {
             this.$store.dispatch("alerts/error", "Feature Not Implemented.")
         },
@@ -185,7 +227,7 @@ export default {
             await this.$router.push({name:'Campaign Contact'});
         },
         updateData() {
-            this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage , query:'', page:this.pagination.currentPage});
+            this.$store.dispatch('searchContactByCampaign', {perPage: this.pagination.perPage , query:this.activeCampaign, page:this.pagination.currentPage});
         },
         addCampaign(){
             this.$router.push({name:'Add Campaign'})
@@ -196,7 +238,7 @@ export default {
 
     async created() {
 
-        await  this.$store.dispatch("getAllCampaigns");
+        await this.$store.dispatch("getAllCampaigns");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
         window.Echo.channel('search')
             .listen('.searchResults', (e) => {

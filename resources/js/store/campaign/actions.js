@@ -16,12 +16,12 @@ export default {
         });
     },
 
-    getAllCampaigns(){
+    getAllCampaigns(context){
         console.log('making api call');
         Client.get('/campaign/all').then(function (response) {
             console.log(response);
             if(response.data!="") {
-                context.commit('CAMPAIGN', response.data);
+                context.commit('CAMPAIGNS', response.data);
             }else{
                 console.log("response data empty");
             }
@@ -45,6 +45,19 @@ export default {
     setActiveContact(context,payload){
         context.commit('SET_ACTIVE_CONTACT', payload);
     },
+
+    searchContactByCampaign (context,payload) {
+        Client.get('campaign/contacts/search/campaign?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
+            if(response.data!="") {
+                context.commit('SET_CAMPAIGN_CONTACTS', response.data);
+            }else{
+                console.log("response data empty");
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
 
     searchContactByOwner (context,payload) {
         Client.get('campaign/contacts/search/owner?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {

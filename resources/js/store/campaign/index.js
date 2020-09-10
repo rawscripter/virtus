@@ -5,6 +5,7 @@ import mutations from './mutations';
 const state = {
     activeContact:null,
     campaign:null,
+    campaigns:null,
     campaignTypes:null,
     campaignContact:null,
     campaignContacts:null,

@@ -49,6 +49,7 @@ Route::prefix('/campaign')->group(function (){
     Route::get('/all', 'api\v1\CampaignController@index')->name('get_campaigns');
     Route::get('/recent', 'api\v1\CampaignController@recent')->name('get_recent_campaigns');
     Route::get('/contact/search/id', 'api\v1\CampaignController@searchCampaignById')->name('search_contact_by_id');
+    Route::get('/contacts/search/campaign', 'api\v1\CampaignController@searchByCampaign')->name('search_contacts_by_campaign');
     Route::get('/contacts/search/owner', 'api\v1\CampaignController@searchByOwner')->name('search_campaign_contacts_owner');
     Route::get('/contacts/search/address', 'api\v1\CampaignController@searchByAddress')->name('search_campaign_contacts_address');
     Route::get('/types/all', 'api\v1\CampaignController@getCampaignTypes')->name('get_campaign_types');
