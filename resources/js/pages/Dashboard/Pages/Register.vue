@@ -86,7 +86,7 @@
                     <md-checkbox v-model="boolean">I agree to the <a>terms and conditions</a>.</md-checkbox>
 
                     <div class="button-container">
-                        <md-button class="md-success md-round mt-4" @click="register" slot="footer" disabled>
+                        <md-button class="md-success md-round mt-4" @click="register" slot="footer" enableRegistration>
                             Get Started
                         </md-button>
                     </div>
@@ -107,7 +107,7 @@ export default {
     mixins: [formMixin],
     data() {
         return {
-            enableRegistration:false,
+            enableRegistration:true,
             username: null,
             first_name: null,
             last_name: null,
