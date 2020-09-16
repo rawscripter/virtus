@@ -7,35 +7,12 @@
                     <div class="card-icon">
                         <md-icon>assignment</md-icon>
                     </div>
-                    <h4 class="title">Campaign List</h4>
+                    <h4 class="title">Contacts</h4>
                 </md-card-header>
 
                 <md-card-content>
-                    <div class="text-right">
-                        <md-button class="md-primary md-dense" @click="addCampaign">
-                            Add Campaign
-                        </md-button>
-                    </div>
                     <div class="md-layout">
-                        <div class="md-layout-item md-size-20">
-                            <md-table
-                                :value="campaigns.data"
-                                :md-sort.sync="sortation.field"
-                                :md-sort-order.sync="sortation.order"
-                                :md-sort-fn="customSort"
-                                class="paginated-table table-striped table-hover"
-                            >
-                                <md-table-row slot="md-table-row" slot-scope="{ item}">
-                                    <md-table-cell md-label="Campaign" md-sort-by="name">{{item.name}}</md-table-cell>
-                                    <md-table-cell md-label="Actions">
-                                        <md-button class="md-icon-button md-raised md-round md-info" @click="getCampaignList(item)" style="margin: .2rem;">
-                                            <md-icon>play_arrow</md-icon>
-                                        </md-button>
-                                    </md-table-cell>
-                                </md-table-row>
-                            </md-table>
-                        </div>
-                        <div class="md-layout-item md-size-75">
+                        <div class="md-layout-item md-size-100">
                             <div v-if="table.length>0">
                             <md-table
                                 :value="table"
@@ -63,8 +40,10 @@
                                 </md-table-toolbar>
 
                                 <md-table-row slot="md-table-row" slot-scope="{ item}">
-                                    <md-table-cell md-label="First Name" md-sort-by="first_name">{{item.contact.first_name}}</md-table-cell>
-                                    <md-table-cell md-label="Last Name" md-sort-by="last_name">{{item.contact.last_name}}</md-table-cell>
+                                    <md-table-cell md-label="ID" md-sort-by="id">{{item.id}}</md-table-cell>
+                                    <md-table-cell md-label="Name" md-sort-by="name">{{item.contact.first_name}} {{item.contact.last_name}}</md-table-cell>
+                                    <md-table-cell md-label="Address" md-sort-by="address">{{item.addresses[0][0]["full_address"]}}</md-table-cell>
+                                    <md-table-cell md-label="Properties Own" md-sort-by="properties">{{item.addresses.length}}</md-table-cell>
                                     <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
                                     <md-table-cell md-label="Actions">
                                         <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
@@ -133,15 +112,10 @@ export default {
     components: {
         "pagination": Pagination
     },
-    watcher:{
-       campaigns: function (){
-           console.log('updated')
-       }
-    },
     data: () => ({
         table: [],
         activeCampaign:'',
-        footerTable: ["Name", "Email", "Created At", "Actions"],
+        footerTable: ["id","Name", "Address", "Properties Own", "Created At", "Actions"],
 
         query: null,
 
@@ -154,7 +128,7 @@ export default {
             total: 1,
             perPage: 5,
             currentPage: 1,
-            perPageOptions: [5, 10, 25, 50],
+            perPageOptions: [5, 10, 25, 50, 'All'],
             to: 1,
             from: 1,
             last_page:1
@@ -165,7 +139,6 @@ export default {
     computed: {
         ...mapGetters({
             campaignContacts: 'campaignContacts',
-            campaigns:'campaigns'
         }),
 
         sort() {
@@ -209,11 +182,6 @@ export default {
             this.table = dataArr
         },
 
-        getCampaignList(data) {
-            this.activeCampaign = data.name
-            this.updateData();
-        },
-
         onProFeature() {
             this.$store.dispatch("alerts/error", "Feature Not Implemented.")
         },
@@ -226,18 +194,11 @@ export default {
             await this.$router.push({name:'Campaign Contact'});
         },
         updateData() {
-            this.$store.dispatch('searchContactByCampaign', {perPage: this.pagination.perPage , query:this.activeCampaign, page:this.pagination.currentPage});
+            this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage , query:this.activeCampaign, page:this.pagination.currentPage});
         },
-        addCampaign(){
-            this.$router.push({name:'Add Campaign'})
-        }
-
-
     },
 
     async created() {
-
-        await this.$store.dispatch("getAllCampaigns");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
         window.Echo.channel('search')
             .listen('.searchResults', (e) => {

@@ -98,54 +98,67 @@
                             <p class="category">
                                 <md-button class="md-raised md-success">{{ properties[0]['full_address'] }}</md-button>
 
-                                 <a :href="getZlink(properties[0]['full_address'])" target="_blank">View On Zillow</a>
+                                <a :href="getZlink(properties[0]['full_address'])" target="_blank">View On Zillow</a>
                             </p>
                         </div>
                     </md-card-header>
-                <md-card-expand>
-                    <md-card-actions>
-                        <md-card-expand-trigger>
-                            <md-button class="md-icon-button">
-                                <md-icon>keyboard_arrow_down</md-icon>
-                            </md-button>
-                        </md-card-expand-trigger>
-
-                       <md-card-expand-content>
-                            <md-table table-header-color="orange" >
-                                <span v-for="property in properties" :key="property.id">
-
-                          <md-table-row slot="md-table-row">
-                                <md-table-cell md-label="Name">{{property.details[0]['details'] }}</md-table-cell>
-                                <md-button class="md-just-icon md-simple md-primary">
-                                    <md-icon>edit</md-icon>
-                                    <md-tooltip md-direction="top">Edit</md-tooltip>
+                    <md-card-expand>
+                        <md-card-actions class="md-alignment-left">
+                            <md-card-expand-trigger>
+                                <md-button class="md-icon-button">
+                                    <md-icon>keyboard_arrow_down</md-icon>
                                 </md-button>
-                                <md-button class="md-just-icon md-simple md-danger">
-                                    <md-icon>close</md-icon>
-                                    <md-tooltip md-direction="top">Close</md-tooltip>
-                                </md-button>
-                            </md-table-row>
+                            </md-card-expand-trigger>
 
+                            <md-card-expand-content>
+                                <md-table table-header-color="orange" >
+                                    <span v-for="property in properties" :key="property.id">
 
+                                      <md-table-row slot="md-table-row">
+                                          <md-table-cell md-label="Details" style="width: 100%">
+                                              <md-field>
+                                              <label>Property Details:</label>
+                                              <md-textarea  v-if="property.details!=null" :value="property.details[0]['details']"></md-textarea>
+                                              <md-textarea v-else ></md-textarea>
+                                              </md-field>
+                                          </md-table-cell>
+                                            <md-button class="md-just-icon md-simple md-primary">
+                                                <md-icon>edit</md-icon>
+                                                <md-tooltip md-direction="top">Edit</md-tooltip>
+                                            </md-button>
+                                            <md-button class="md-just-icon md-simple md-danger">
+                                                <md-icon>close</md-icon>
+                                                <md-tooltip md-direction="top">Close</md-tooltip>
+                                            </md-button>
+                                        </md-table-row>
+                                        </span>
+                                </md-table>
 
-                           <md-table-row slot="md-table-row">
-                                <md-table-cell md-label="Name" v-for="owner in property.owners" :key="owner.id">{{owner.first_name}} {{owner.last_name}}</md-table-cell>
-                                <md-button class="md-just-icon md-simple md-primary">
-                                    <md-icon>edit</md-icon>
-                                    <md-tooltip md-direction="top">Edit</md-tooltip>
-                                </md-button>
-                                <md-button class="md-just-icon md-simple md-danger">
-                                    <md-icon>close</md-icon>
-                                    <md-tooltip md-direction="top">Close</md-tooltip>
-                                </md-button>
-                            </md-table-row>
-                            </span>
-                        </md-table>
-                    </md-card-expand-content>
+                                <md-list class="" v-for="property in properties" :key="property.id">
+                                    <md-list-item v-for="owner in property.owners" :key="owner.id">
+                                        <md-avatar>
+                                            <img src="https://placeimg.com/40/40/people/1" alt="People">
+                                        </md-avatar>
+                                        <md-field>
+                                            <md-input :value="owner.first_name + ' ' + owner.last_name">{{owner.first_name}} {{owner.last_name}}</md-input>
+                                        </md-field>
+                                        <md-button class="md-just-icon md-list-action">
+                                            <md-icon>edit</md-icon>
+                                            <md-tooltip md-direction="top">Edit</md-tooltip>
+                                        </md-button>
+                                        <md-button class="md-just-icon md-list-action">
+                                            <md-icon>close</md-icon>
+                                            <md-tooltip md-direction="top">Close</md-tooltip>
+                                        </md-button>
+                                    </md-list-item>
 
-                </md-card-actions>
+                                    <md-divider class="md-inset"></md-divider>
+                                </md-list>
+                            </md-card-expand-content>
 
-                </md-card-expand>
+                        </md-card-actions>
+
+                    </md-card-expand>
                 </md-card>
             </md-card>
 
@@ -298,7 +311,7 @@ export default {
         },
 
         onTabChange(tabIndex) {
-       this.infoTab=tabIndex
+            this.infoTab=tabIndex
         },
 
     },
@@ -318,4 +331,9 @@ export default {
 .card-margin{
     margin: 5px !important;
 }
+
+.md-card-expand-content{
+    width: 100%;
+}
+
 </style>

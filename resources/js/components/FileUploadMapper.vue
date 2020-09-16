@@ -117,7 +117,7 @@ import {mapGetters} from "vuex";
 export default {
     name: "FileUploadMapper",
     components:{
-        VueCsvImport
+        VueCsvImport,
     },
     data(){
         return {
@@ -180,12 +180,10 @@ export default {
     methods: {
         getSample(){
             let sample = this.csv.filter((data, value)=>value <20)
-            console.log(sample)
             return sample;
         },
         nextClicked(currentPage, e) {
             if(currentPage!==3) {
-                console.log('next clicked', currentPage);
                 return true; //return false if you want to prevent moving to previous page
             }else {
                 let data = {
@@ -196,7 +194,6 @@ export default {
             }
         },
         backClicked(currentPage) {
-            console.log('back clicked', currentPage);
             return true; //return false if you want to prevent moving to previous page
 
         },

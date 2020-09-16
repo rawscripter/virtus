@@ -30,7 +30,7 @@ class CampaignController extends Controller
     {
         $results = Owner::orderBy('updated_at')->get();
         Log::info($results);
-       return OwnerResource::collection($results);
+        return OwnerResource::collection($results);
     }
 
 
@@ -45,10 +45,12 @@ class CampaignController extends Controller
         $queryStr = $request->query('query');
         $perPage = $request->query('perPage');
         $page = $request->query('page');
-        $campaignContact = Owner::whereHas('campaigns', function (Builder $query) use ($queryStr){
-                $query->where('name', 'like', '%'. $queryStr. '%');
 
-            })
+
+        $campaignContact = Owner::whereHas('campaigns', function (Builder $query) use ($queryStr) {
+            $query->where('name', 'like', '%' . $queryStr . '%');
+
+        })
             ->paginate($perPage)
             ->appends($page);
         return OwnerResource::collection($campaignContact);
@@ -59,16 +61,18 @@ class CampaignController extends Controller
         $query = $request->query('query');
         $perPage = $request->query('perPage');
         $page = $request->query('page');
+
+
+        Log::info('searching owner ' . $perPage);
+
+
         $campaignContact = Owner::where('first_name', 'like', '%' . $query . '%')
             ->orWhere('last_name', 'like', '%' . $query . '%')
             ->paginate($perPage)
             ->appends($page);
         //    event(new SearchEvent($campaignContact));
-
         return OwnerResource::collection($campaignContact);
     }
-
-
 
     public function searchByAddress(Request $request)
     {
@@ -102,10 +106,19 @@ class CampaignController extends Controller
         $collection = collect($request['csv'] );
         $unique = $collection->unique();
         $incomingCampaign =$request['campaign'];
-
         $campaign = Campaign::where('id', $incomingCampaign['id'])->get();
         DB::transaction(function () use ($unique, $campaign) {
+
             $unique->each(function ($contact) use ($campaign) {
+                $required_keys = array('first_name','last_name','mailing_address','mailing_city','mailing_state','mailing_zip',
+                    'property_address','property_city','property_state','property_zip',
+                    'phone1','phone1_type', 'phone2','phone2_type', 'phone3','phone3_type','phone4','phone4_type','phone5','phone5_type', 'phone6','phone6_type', 'email');
+
+                foreach ($required_keys as $possibleKey){
+                    if (!array_key_exists($possibleKey, $contact)) {
+                        $contact[$possibleKey]= 'None Provided';
+                    }
+                }
                 $owner = Owner::firstOrCreate([
                     'first_name' => $contact['first_name'],
                     'last_name' => $contact['last_name'],
@@ -140,6 +153,7 @@ class CampaignController extends Controller
                         ]
                     ));
                 $owner->save();
+                DB::commit();
             });
         }, 1);
     }

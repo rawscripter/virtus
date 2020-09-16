@@ -61,6 +61,7 @@ export default {
 
     searchContactByOwner (context,payload) {
         Client.get('campaign/contacts/search/owner?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
+            console.log(response);
             if(response.data!="") {
                 context.commit('SET_CAMPAIGN_CONTACTS', response.data);
             }else{
@@ -116,7 +117,7 @@ export default {
         */
         Client.post( 'campaign/create', data
         ).then(function(response){
-            this.$router.push({name: 'campaigns'});
+            this.$router.push({name: 'campaign-list'});
             context.commit('CAMPAIGN_LOADED', true);
 
         }.bind(this))
@@ -131,7 +132,7 @@ export default {
         */
         Client.post( 'campaign/type/create', data
         ).then(function(response){
-            this.$router.push({name: 'admin'});
+            this.$router.push({name: 'campaign-list'});
             context.commit('CAMPAIGN_TYPE_LOADED', true);
 
         }.bind(this))

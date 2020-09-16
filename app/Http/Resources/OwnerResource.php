@@ -32,7 +32,7 @@ class OwnerResource extends JsonResource
                 ],
             'phones'=> PhoneResource::collection($this->phones),
             'addresses'=> PropertyAddressResource::collection($this->propertyAddresses),
-            'campaigns'=> CampaignResource::collection($this->campaigns),
+            'campaigns'=> $this->campaigns,
             'created'=> date('h:i:s A', strtotime($this->created_at)),
             'updated'=> date('F d, Y @ h:i:s A', strtotime($this->updated_at)),
         ];

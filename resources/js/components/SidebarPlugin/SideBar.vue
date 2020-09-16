@@ -59,7 +59,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Virtus Investment Group, LLC"
+      default: "REI Undisputed, LLC"
     },
     rtlTitle: {
       type: String,
@@ -103,7 +103,7 @@ export default {
     },
     autoClose: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   created() {
@@ -130,7 +130,7 @@ export default {
   },
   beforeDestroy() {
     if (this.$sidebar.showSidebar) {
-      this.$sidebar.showSidebar = false;
+      this.$sidebar.showSidebar = true;
     }
   }
 };

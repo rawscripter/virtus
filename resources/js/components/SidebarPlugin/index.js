@@ -2,7 +2,7 @@ import Sidebar from "./SideBar.vue";
 import SidebarItem from "./SidebarItem.vue";
 
 const SidebarStore = {
-  showSidebar: false,
+  showSidebar: true,
   sidebarLinks: [],
   linksStore: [],
   isMinimized: false,
