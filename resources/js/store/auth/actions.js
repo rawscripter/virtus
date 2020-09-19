@@ -16,15 +16,16 @@ const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
 export default {
     login(context, payload) {
         return vueAuth.login(payload.user, payload.requestOptions).then(response => {
-         let tokenData= response.data.data;
-            if (tokenData.access_token) {
-              localStorage.setItem('access_token', tokenData.access_token);
-                context.commit("isAuthenticated", {
-                    isAuthenticated: true
+            context.commit("isAuthenticated", {
+                isAuthenticated: vueAuth.isAuthenticated()
+            });
+            if(response.data.access_token) {
+                context.commit('AUTH_ID', {
+                    authID: response.data.user.id
                 });
-                context.commit('AUTH_ID', tokenData.user.id);
+                router.push({name: "Home"});
             }
-            router.push({name: "Home"});
+
         });
     },
 

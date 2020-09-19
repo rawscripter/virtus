@@ -67,10 +67,9 @@ class AuthController
             ]);
             $tokenData = json_decode((string)$response->getBody(), true);
             $tokenData['user'] = $user;
-            return response(['data' => $tokenData]);
+            return $tokenData;
         } catch (ClientException $e) {
             $error = json_decode($e->getResponse()->getBody()->getContents());
-Log::info($error);
             return response([
                 'title' => 'Bad Request',
                 'detail' => $error->message,

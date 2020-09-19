@@ -28,7 +28,7 @@ class CampaignController extends Controller
 
     public function recent()
     {
-        $results = Owner::orderBy('updated_at')->get();
+        $results = Owner::orderBy('updated_at')->paginate(10);
         Log::info($results);
         return OwnerResource::collection($results);
     }

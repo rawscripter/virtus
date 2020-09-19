@@ -1,9 +1,9 @@
 export default {
     USER: (state, user) =>{
-        state.user = user
+        state.user = user;
     },
 
     USERS: (state, users) =>{
-        state.users = users
+        state.users = users;
     }
 }

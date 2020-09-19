@@ -34,7 +34,7 @@ class OwnerResource extends JsonResource
             'addresses'=> PropertyAddressResource::collection($this->propertyAddresses),
             'campaigns'=> $this->campaigns,
             'created'=> date('h:i:s A', strtotime($this->created_at)),
-            'updated'=> date('F d, Y @ h:i:s A', strtotime($this->updated_at)),
+            'updated'=> date('M d, Y @ h:i:s A', strtotime($this->updated_at)),
         ];
     }
 }

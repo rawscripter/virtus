@@ -17,7 +17,6 @@ class CampaignListResource extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'owners'=> OwnerResource::collection($this->owners),
             'size'=>sizeof($this->owners),
             'created'=> date('F d, Y', strtotime($this->created_at)),
             'updated'=> date('F d, Y', strtotime($this->updated_at)),

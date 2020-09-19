@@ -84,7 +84,6 @@ export default {
 
             try {
                 await this.$store.dispatch("login", {user, requestOptions})
-
             } catch (e) {
                 await this.$store.dispatch("alerts/error", "Invalid credentials!")
                 this.setApiValidation(e.response.data.errors)

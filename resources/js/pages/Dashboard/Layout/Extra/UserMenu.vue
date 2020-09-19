@@ -65,12 +65,8 @@ export default {
 
   async created() {
     this.$store.watch(() => this.$store.getters["USER"], (me) => {
-        console.log('meeeee')
-        console.log(me)
       this.title = me.name
     })
-
-      console.log('print user')
     await this.$store.dispatch("getUser", this.$store.getters['AUTH_ID'])
   },
 

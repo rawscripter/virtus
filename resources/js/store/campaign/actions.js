@@ -5,7 +5,6 @@ export default {
 
 
     getRecentlyUpdatedLeads(context) {
-        console.log('ready');
         Client.get('/campaign/recent').then(function (response){
             console.log(response);
            if(response.data!=''){
@@ -17,8 +16,9 @@ export default {
     },
 
     getAllCampaigns(context){
-        console.log('making api call');
+        console.log('getting all campaigns');
         Client.get('/campaign/all').then(function (response) {
+            console.log('is in response');
             console.log(response);
             if(response.data!="") {
                 context.commit('CAMPAIGNS', response.data);
@@ -61,7 +61,6 @@ export default {
 
     searchContactByOwner (context,payload) {
         Client.get('campaign/contacts/search/owner?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
-            console.log(response);
             if(response.data!="") {
                 context.commit('SET_CAMPAIGN_CONTACTS', response.data);
             }else{

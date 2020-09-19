@@ -9,7 +9,6 @@
                     </div>
                     <h4 class="title">Campaign List</h4>
                 </md-card-header>
-
                 <md-card-content>
                     <div class="text-right">
                         <md-button class="md-primary md-dense" @click="addCampaign">
@@ -26,7 +25,7 @@
                                 class="paginated-table table-striped table-hover"
                             >
                                 <md-table-row slot="md-table-row" slot-scope="{ item}">
-                                    <md-table-cell md-label="Campaign" md-sort-by="name">{{item.name}}</md-table-cell>
+                                    <md-table-cell md-label="Campaign" md-sort-by="name">{{item.name}} ({{item.size}})</md-table-cell>
                                     <md-table-cell md-label="Actions">
                                         <md-button class="md-icon-button md-raised md-round md-info" @click="getCampaignList(item)" style="margin: .2rem;">
                                             <md-icon>play_arrow</md-icon>
@@ -65,6 +64,9 @@
                                 <md-table-row slot="md-table-row" slot-scope="{ item}">
                                     <md-table-cell md-label="First Name" md-sort-by="first_name">{{item.contact.first_name}}</md-table-cell>
                                     <md-table-cell md-label="Last Name" md-sort-by="last_name">{{item.contact.last_name}}</md-table-cell>
+                                    <md-table-cell md-label="Address" md-sort-by="address">{{item.addresses[0][0]["full_address"]}}</md-table-cell>
+                                    <md-table-cell md-label="Properties" md-sort-by="properties">{{item.addresses.length}}</md-table-cell>
+                                    <md-table-cell md-label="Best Number" md-sort-by="phone_number #">{{item.phones[0][0]["phone"]}}</md-table-cell>
                                     <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
                                     <md-table-cell md-label="Actions">
                                         <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
@@ -133,15 +135,11 @@ export default {
     components: {
         "pagination": Pagination
     },
-    watcher:{
-       campaigns: function (){
-           console.log('updated')
-       }
-    },
+
     data: () => ({
         table: [],
         activeCampaign:'',
-        footerTable: ["Name", "Email", "Created At", "Actions"],
+        footerTable: ["Name", "Email","Property", "Properties","Best Number", "Created At", "Actions"],
 
         query: null,
 
@@ -152,7 +150,7 @@ export default {
 
         pagination: {
             total: 1,
-            perPage: 5,
+            perPage: 25,
             currentPage: 1,
             perPageOptions: [5, 10, 25, 50],
             to: 1,
@@ -179,6 +177,10 @@ export default {
     },
 
     watch :{
+        campaigns: function (){
+            console.log('updated')
+        },
+
         campaignContacts: function (e) {
             if (e.meta.currentPage == this.pagination.currentPage)
             {
@@ -236,7 +238,6 @@ export default {
     },
 
     async created() {
-
         await this.$store.dispatch("getAllCampaigns");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
         window.Echo.channel('search')

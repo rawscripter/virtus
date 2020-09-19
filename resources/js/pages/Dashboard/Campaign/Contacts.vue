@@ -39,20 +39,18 @@
 
                                 </md-table-toolbar>
 
-                                <md-table-row slot="md-table-row" slot-scope="{ item}">
-                                    <md-table-cell md-label="ID" md-sort-by="id">{{item.id}}</md-table-cell>
+                                <md-table-row slot="md-table-row" @click="onEdit(item)" slot-scope="{ item}">
+                                    <md-table-cell md-label="ID"  md-sort-by="id">{{item.id}}</md-table-cell>
                                     <md-table-cell md-label="Name" md-sort-by="name">{{item.contact.first_name}} {{item.contact.last_name}}</md-table-cell>
-                                    <md-table-cell md-label="Address" md-sort-by="address">{{item.addresses[0][0]["full_address"]}}</md-table-cell>
+                                    <md-table-cell md-label="Address" md-sort-by="address">{{item.addresses[0][0]["street"]}}</md-table-cell>
+                                    <md-table-cell md-label="City" md-sort-by="address">{{item.addresses[0][0]["city"]}}</md-table-cell>
+                                    <md-table-cell md-label="State" md-sort-by="address">{{item.addresses[0][0]["state"]}}</md-table-cell>
+                                    <md-table-cell md-label="Zip Code" md-sort-by="address">{{item.addresses[0][0]["zip"]}}</md-table-cell>
                                     <md-table-cell md-label="Properties Own" md-sort-by="properties">{{item.addresses.length}}</md-table-cell>
+                                    <md-table-cell md-label="Campaigns On" md-sort-by="campaigns">{{item.campaigns.length}}</md-table-cell>
+                                    <md-table-cell md-label="Best Number" md-sort-by="phone_number #">{{item.phones[0][0]["phone"]}}</md-table-cell>
+                                    <md-table-cell md-label="Available Numbers" md-sort-by="campaigns">{{item.phones.length}}</md-table-cell>
                                     <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
-                                    <md-table-cell md-label="Actions">
-                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
-                                            <md-icon>edit</md-icon>
-                                        </md-button>
-                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
-                                            <md-icon>delete</md-icon>
-                                        </md-button>
-                                    </md-table-cell>
                                 </md-table-row>
                             </md-table>
                                 </div>
@@ -115,7 +113,7 @@ export default {
     data: () => ({
         table: [],
         activeCampaign:'',
-        footerTable: ["id","Name", "Address", "Properties Own", "Created At", "Actions"],
+        footerTable: ["id","Name", "Address", "Properties Own", "Campaigns On","Best Number", "Available Numbers", "Last Updated"],
 
         query: null,
 
@@ -126,7 +124,7 @@ export default {
 
         pagination: {
             total: 1,
-            perPage: 5,
+            perPage: 25,
             currentPage: 1,
             perPageOptions: [5, 10, 25, 50, 'All'],
             to: 1,
