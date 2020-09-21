@@ -18,6 +18,7 @@ import CampaignPage from "@pages/Dashboard/Campaign/CampaignPage";
 import CampaignContact from "@pages/Dashboard/Campaign/CampaignContact";
 import AddCampaign from "@pages/Dashboard/Campaign/AddCampaign";
 import CampaignContacts from "@pages/Dashboard/Campaign/Contacts";
+import Leads from "@pages/Dashboard/Campaign/Leads";
 
 // Pages
 import RtlSupport from "@pages/Dashboard/Pages/RtlSupport.vue";
@@ -139,6 +140,14 @@ let campaignMenu = {
             path: "add-campaign",
             name: "Add Campaign",
             components: { default: AddCampaign },
+            meta: { middleware: auth }
+        },
+
+
+        {
+            path: "leads",
+            name: "Leads",
+            components: { default: Leads },
             meta: { middleware: auth }
         },
     ]
