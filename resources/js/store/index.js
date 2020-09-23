@@ -2,11 +2,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from "vuex-persistedstate";
 
+
+import alerts from "./modules/alerts-module";
+
 import auth from "./auth";
-import callraIl from "./callrail";
+import callrail from "./callrail";
 import users from "./users";
 import campaigns from "./campaign";
-import alerts from "./modules/alerts-module";
+import lead from "./lead";
 
 
 
@@ -22,7 +25,8 @@ export default new Vuex.Store(
             alerts,
             campaigns,
             users,
-            callraIl
+            callrail,
+            lead
         }
     }
 );

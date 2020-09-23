@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLeadsStatusTable extends Migration
+class LeadTemperatures extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateLeadsStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('leads_status', function (Blueprint $table) {
+        Schema::create('lead_temperatures', function (Blueprint $table) {
             $table->id();
+            $table->string('temperature_type');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateLeadsStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leads_status');
+        Schema::dropIfExists('lead_temperatures');
     }
 }

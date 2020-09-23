@@ -20,7 +20,7 @@
                 <sidebar-item v-else :link="{ name: 'Dashboard', icon: 'dashboard', path: '/dashboard' }" />
                 <sidebar-item :link="{ name: 'Contacts', icon: 'phone', path: '/campaign/contacts'}" />
                 <sidebar-item :link="{ name: 'Campaigns', icon: 'list', path: '/campaign/campaign-list'}" />
-                <sidebar-item :link="{ name: 'Leads', icon: 'fact_check', path: '/campaign/leads'}" />
+                <sidebar-item :link="{ name: 'Leads', icon: 'fact_check', path: '/lead/leads'}" />
 
                 <sidebar-item :link="{ name: 'User Profile', icon: 'perm_identity', path: '/profile/user-profile'}" />
 
@@ -135,7 +135,7 @@ export default {
     data() {
         return {
             sidebarBackgroundColor: "black",
-            sidebarBackground: "green",
+            sidebarBackground: "azure",
             sidebarBackgroundImage: process.env.APP_URL + "/images/sidebar-2.jpg",
             sidebarMini: true,
             sidebarImg: true,
@@ -190,7 +190,12 @@ $scaleSize: 0.95;
         transform: scale3d($scaleSize, $scaleSize, $scaleSize);
     }
 }
+.main-panel{
+
+    background-color: #ffffff !important;
+}
 .main-panel .zoomOut {
     animation-name: zoomOut95;
 }
+
 </style>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatusTypesTable extends Migration
+class CommunicationTypes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateStatusTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('status_types', function (Blueprint $table) {
+        Schema::create('communication_types', function (Blueprint $table) {
             $table->id();
+            $table->string('communication_type');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateStatusTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_types');
+        Schema::dropIfExists('communication_types');
     }
 }

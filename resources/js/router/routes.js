@@ -18,8 +18,10 @@ import CampaignPage from "@pages/Dashboard/Campaign/CampaignPage";
 import CampaignContact from "@pages/Dashboard/Campaign/CampaignContact";
 import AddCampaign from "@pages/Dashboard/Campaign/AddCampaign";
 import CampaignContacts from "@pages/Dashboard/Campaign/Contacts";
-import Leads from "@pages/Dashboard/Campaign/Leads";
 
+//Lead
+import Leads from "@pages/Dashboard/Lead/Leads";
+import AddLead from "@pages/Dashboard/Lead/AddLead";
 // Pages
 import RtlSupport from "@pages/Dashboard/Pages/RtlSupport.vue";
 import Login from "@pages/Dashboard/Pages/Login.vue";
@@ -142,12 +144,27 @@ let campaignMenu = {
             components: { default: AddCampaign },
             meta: { middleware: auth }
         },
+    ]
+};
 
+
+
+let leadMenu ={
+    path: "/lead",
+    component: DashboardLayout,
+    name: "Lead",
+    children: [
 
         {
             path: "leads",
             name: "Leads",
             components: { default: Leads },
+            meta: { middleware: auth }
+        },
+        {
+            path: "add-leads",
+            name: "Add Lead",
+            components: { default: AddLead },
             meta: { middleware: auth }
         },
     ]
@@ -237,7 +254,8 @@ const routes = [
     adminMenu,
     authPages,
     mainpages,
-    campaignMenu
+    campaignMenu,
+    leadMenu
 ];
 
 export default routes;

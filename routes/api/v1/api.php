@@ -43,6 +43,20 @@ Route::prefix('/inquiry')->group(function () {
     Route::middleware('auth:api')->delete('/jv/delete/{id}', 'api\v1\forms\JointVentureController@delete');
 });
 
+Route::prefix('/leads')->group(function (){
+    Route::get('/getEnums', 'api\v1\LeadController@getLeadEnums')->name('get_lead_enums');
+
+    Route::post('/type/status', 'api\v1\LeadController@addLeadStatusTypes')->name('create_status_type');
+    Route::post('/type/stage', 'api\v1\LeadController@addLeadContactStageTypes')->name('create_stage_type');
+    Route::post('/type/temperature', 'api\v1\LeadController@addLeadTemperatureTypes')->name('create_temperature_type');
+    Route::post('/type/followUp', 'api\v1\LeadController@addLeadFollowUpTypes')->name('create_follow_up_type');
+    Route::post('/type/occupancy', 'api\v1\LeadController@addLeadOccupancyTypes')->name('create_occupancy_type');
+    Route::post('/type/offerMade', 'api\v1\LeadController@addLeadOfferMadeTypes')->name('create_offer_made_type');
+    Route::post('/type/offerAccepted', 'api\v1\LeadController@addLeadOfferAcceptedTypes')->name('create_offer_accepted_type');
+    Route::post('/type/communication', 'api\v1\LeadController@addCommunicationTypes')->name('create_communication_type');
+
+});
+
 Route::prefix('/campaign')->group(function (){
     Route::post('/create', 'api\v1\CampaignController@create')->name('create_campaign');
     Route::post('/type/create', 'api\v1\CampaignController@createCampaignType')->name('create_campaign_type');

@@ -230,13 +230,15 @@ export default {
             this.$store.dispatch('searchContactByCampaign', {perPage: this.pagination.perPage , query:this.activeCampaign, page:this.pagination.currentPage});
         },
         addLead(){
-            this.$router.push({name:'Add Campaign'})
+            this.$router.push({name:'Add Lead'})
         }
 
 
     },
 
     async created() {
+
+        await this.$store.dispatch('getLeadEnums');
         await this.$store.dispatch("getAllCampaigns");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
         window.Echo.channel('search')
