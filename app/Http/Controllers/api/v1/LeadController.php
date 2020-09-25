@@ -18,12 +18,27 @@ use Illuminate\Support\Facades\Log;
 class LeadController extends Controller
 {
 
-    public function getLeadEnums() {
+    public function getLeadStatuses() {
 
-        Log::info('get values');
-        $lead = new Lead();
-        Log::info($lead->defaultEnumValues());
-        return $lead->defaultEnumValues();
+        $stage =ContactStage::paginate(25);
+        $temperature = LeadTemperature::paginate(25);
+        $status = LeadStatus::paginate(25);
+        $followUp = LeadFollowUpType::paginate(25);
+        $occupancy = OccupancyType::paginate(25);
+        $offerMade = OfferMadeType::paginate(25);
+        $offerAccepted = OfferAcceptedType::paginate(25);
+        $communication = CommunicationType::paginate(25);
+
+        return response([
+            'stage'=>$stage,
+            'temperature'=>$temperature,
+            'status'=>$status,
+            'followUp'=>$followUp,
+            'occupancy'=>$occupancy,
+            'offerMade'=>$offerMade,
+            'offerAccepted'=>$offerAccepted,
+            'communication'=>$communication,
+        ]);
     }
 
     public function addLead(){

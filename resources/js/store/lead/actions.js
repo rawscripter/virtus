@@ -2,6 +2,14 @@ import Client from '../../api-services/api-client';
 
 export default {
 
+
+    getLeadStatuses(context){
+        Client.get('/leads/type/getLeadStatuses').then(function (response){
+            console.log(response);
+            context.commit('LEAD_STATUSES', response.data);
+        });
+    },
+
     status (context, data){
         Client.post('/leads/type/status', data).then(function (response){
             context.commit('STATUS_TYPE', response.data);
@@ -23,7 +31,7 @@ export default {
     },
 
     temperature (context, data){
-        Client.post('/leads/type/followUp', data).then(function (response){
+        Client.post('/leads/type/temperature', data).then(function (response){
             context.commit('TEMPERATURE_TYPE', response.data);
 
         }.bind(this))
@@ -72,6 +80,19 @@ export default {
         }.bind(this))
             .catch(function(response){
                 context.commit('OFFER_ACCEPTED_TYPE', false);
+            });
+    },
+
+    communicationType (context, data) {
+        /*
+          Make the request to the POST /single-file URL
+        */
+        Client.post( '/leads/type/communication', data
+        ).then(function(response){
+            context.commit('COMMUNICATION_TYPE', response.data);
+        }.bind(this))
+            .catch(function(response){
+                context.commit('COMMUNICATION_TYPE', false);
             });
     }
 

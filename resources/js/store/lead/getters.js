@@ -1,4 +1,6 @@
 export default {
+    leadStatuses: state=> state.leadStatuses,
+
     stageType: state => state.stageType,
 
     statusType: state => state.statusType,
@@ -12,4 +14,6 @@ export default {
     temperatureType: state => state.temperatureType,
 
     followUpType: state => state.followUpType,
+
+    communicationType: state => state.communicationType,
 };

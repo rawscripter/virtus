@@ -3,13 +3,15 @@ import getters from './getters';
 import mutations from "./mutations";
 
 const state = {
-     statusType: null,
-     stageType:null,
+    leadStatuses: null,
+    statusType: null,
+    stageType:null,
     temperatureType:null,
     followUpType:null,
     occupancyType:null,
     offerMadeType:null,
     offerAcceptedType:null,
+    communicationType: null
 };
 
 export default {

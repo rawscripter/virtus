@@ -1,5 +1,10 @@
 <template>
     <main role="main">
+        <video width="320" height="240" controls>
+            <source src="https://player.vimeo.com/video/459436724" type="video/mp4">
+            <source src="movie.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
         <div class="picContainer">
             <picture>
                 <source srcset="@/assets/images/bg1Lg.png" media="(min-width: 1400px)">

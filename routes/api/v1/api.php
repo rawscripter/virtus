@@ -44,7 +44,8 @@ Route::prefix('/inquiry')->group(function () {
 });
 
 Route::prefix('/leads')->group(function (){
-    Route::get('/getEnums', 'api\v1\LeadController@getLeadEnums')->name('get_lead_enums');
+
+    Route::get('/type/getLeadStatuses', 'api\v1\LeadController@getLeadStatuses')->name('get_lead_statuses');
 
     Route::post('/type/status', 'api\v1\LeadController@addLeadStatusTypes')->name('create_status_type');
     Route::post('/type/stage', 'api\v1\LeadController@addLeadContactStageTypes')->name('create_stage_type');

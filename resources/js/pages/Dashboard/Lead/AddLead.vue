@@ -3,11 +3,11 @@
         <div>
             <div class="md-layout-item md-medium-size-100 md-xsmall-size-100">
                 <md-card class="pageLayout">
-              <!--      <md-card-header class="md-card-header-text md-card-header-warning">
-                        <div class="card-text">
-                            <h4 class="title">Add New Lead</h4>
-                        </div>
-                    </md-card-header>-->
+                    <!--      <md-card-header class="md-card-header-text md-card-header-warning">
+                              <div class="card-text">
+                                  <h4 class="title">Add New Lead</h4>
+                              </div>
+                          </md-card-header>-->
                     <md-card-content>
                         <div class="md-layout">
                             <div class="md-layout-item md-small-size-100"  >
@@ -79,13 +79,7 @@
                                     <md-icon>bubble_chart</md-icon>
                                     <div>
                                         <label  class="label-color bt-label">Lead Status</label> <br />
-                                        <md-button class="md-raised">New Virgin Leads</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Undiscovered Leads</md-button>
-                                        <md-button class="md-raised md-primary">Interested Leads (Short Term Follow Up)</md-button>
-                                        <md-button class="md-raised md-accent">Not interested Leads (Long Term Follow Up)</md-button>
-                                        <md-button class="md-raised">DEAD (Wrong#/ Upset / Cursing)</md-button>
-                                        <md-button class="md-raised">Sent</md-button>
-                                        <md-button class="md-raised">Signed Contract</md-button>
+                                        <md-button class="md-raised" v-for="status in leadStatuses.status.data" :key="status.id">{{status.status_type}}</md-button>
                                     </div>
                                 </md-field>
                                 <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
@@ -98,11 +92,7 @@
                                     <md-icon>connect_without_contact</md-icon>
                                     <div>
                                         <label  class="label-color bt-label">Contact Stage</label> <br />
-                                        <md-button class="md-raised">Default</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
-                                        <md-button class="md-raised md-primary">Primary</md-button>
-                                        <md-button class="md-raised md-accent">Accent</md-button>
-                                        <md-button class="md-raised" disabled>Disabled</md-button>
+                                        <md-button class="md-raised" v-for="stage in leadStatuses.stage.data" :key="stage.id">{{stage.stages_type}}</md-button>
                                     </div>
                                 </md-field>
 
@@ -110,22 +100,15 @@
                                     <md-icon>weather</md-icon>
                                     <div>
                                         <label  class="label-color bt-label">Lead Temperature</label> <br />
-                                        <md-button class="md-raised">Default</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
-                                        <md-button class="md-raised md-primary">Primary</md-button>
-                                        <md-button class="md-raised md-accent">Accent</md-button>
-                                        <md-button class="md-raised" disabled>Disabled</md-button>
+                                        <md-button class="md-raised" v-for="temperature in leadStatuses.temperature.data" :key="temperature.id">{{temperature.temperature_type}}</md-button>
                                     </div>
                                 </md-field>
+
                                 <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
                                     <md-icon>weather</md-icon>
                                     <div>
                                         <label  class="label-color bt-label">Follow Up In</label> <br />
-                                        <md-button class="md-raised">Default</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
-                                        <md-button class="md-raised md-primary">Primary</md-button>
-                                        <md-button class="md-raised md-accent">Accent</md-button>
-                                        <md-button class="md-raised" disabled>Disabled</md-button>
+                                        <md-button class="md-raised" v-for="followUp in leadStatuses.followUp.data" :key="followUp.id">{{followUp.lead_followup_type}}</md-button>
                                     </div>
                                 </md-field>
 
@@ -146,11 +129,7 @@
                                     <md-icon>weather</md-icon>
                                     <div>
                                         <label  class="label-color bt-label">Occupancy</label> <br />
-                                        <md-button class="md-raised">Default</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
-                                        <md-button class="md-raised md-primary">Primary</md-button>
-                                        <md-button class="md-raised md-accent">Accent</md-button>
-                                        <md-button class="md-raised" disabled>Disabled</md-button>
+                                        <md-button class="md-raised" v-for="occupancy in leadStatuses.occupancy.data" :key="occupancy.id">{{occupancy.occupancy_type}}</md-button>
                                     </div>
                                 </md-field>
 
@@ -197,11 +176,7 @@
                                     <md-icon>request_quote</md-icon>
                                     <div>
                                         <label class="label-color bt-label">Offer Made</label> <br />
-                                        <md-button class="md-raised">Default</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
-                                        <md-button class="md-raised md-primary">Primary</md-button>
-                                        <md-button class="md-raised md-accent">Accent</md-button>
-                                        <md-button class="md-raised" disabled>Disabled</md-button>
+                                        <md-button class="md-raised" v-for="offerMade in leadStatuses.offerMade.data" :key="offerMade.id">{{offerMade.offer_made_type}}</md-button>
                                     </div>
                                 </md-field>
 
@@ -217,11 +192,7 @@
                                     <div>
                                         <label class="label-color bt-label">Offer Accepted</label>
                                         <br>
-                                        <md-button class="md-raised">Default</md-button>
-                                        <md-button class="md-raised" :md-ripple="false">Ripple Off</md-button>
-                                        <md-button class="md-raised md-primary">Primary</md-button>
-                                        <md-button class="md-raised md-accent">Accent</md-button>
-                                        <md-button class="md-raised" disabled>Disabled</md-button>
+                                        <md-button class="md-raised" v-for="offerAccepted in leadStatuses.offerAccepted.data" :key="offerAccepted.id">{{offerAccepted.offer_accepted_type}}</md-button>
                                     </div>
                                 </md-field>
 
@@ -258,58 +229,72 @@ import {
     ChartCard,
     NavTabsCard
 } from "@/components";
-
+import {mapGetters} from "vuex";
 
 export default {
     name: "AddLead",
 
-    components:{
+    components: {
         ValidationError,
         StatsCard,
         ChartCard,
         NavTabsCard
     },
-
     mixins: [formMixin],
 
-    data() {
-        return {
-            owner_id:"",
-            first_name:"",
-            last_name:"",
-            email:"",
-            phone_number:"",
-            communication_type_id:"",
-            other_owner_info:"",
-            property_address: "",
-            property_city:"",
-            property_state:"",
-            property_zip:"",
-            property_site_link:"",
-            lead_status_id:"",
-            lead_status_notes:"",
-            contact_stage_id:"",
-            lead_temperature_id:"",
-            follow_up_type_id:"",
-            follow_up_date:"",
-            occupancy_id:"",
-            occupancy_details:"",
-            property_details:"",
-            reason_to_sell:"",
-            mortgage_amount:"",
-            HOA:"",
-            asking_price:"",
-            offer_made_id:"",
-            offer_amount:"",
-            offer_accepted_id:"",
-            accepted_offer:"",
-            lead_manager_id:"",
-        }
-    },
+    computed: {
+        ...mapGetters({
+            leadStatuses: 'leadStatuses'
+        }),
 
-    methods: {
-        async addLead(){
+        data() {
+            return {
+                owner_id: "",
+                first_name: "",
+                last_name: "",
+                email: "",
+                phone_number: "",
+                communication_type_id: "",
+                other_owner_info: "",
+                property_address: "",
+                property_city: "",
+                property_state: "",
+                property_zip: "",
+                property_site_link: "",
+                lead_status_id: "",
+                lead_status_notes: "",
+                contact_stage_id: "",
+                lead_temperature_id: "",
+                follow_up_type_id: "",
+                follow_up_date: "",
+                occupancy_id: "",
+                occupancy_details: "",
+                property_details: "",
+                reason_to_sell: "",
+                mortgage_amount: "",
+                HOA: "",
+                asking_price: "",
+                offer_made_id: "",
+                offer_amount: "",
+                offer_accepted_id: "",
+                accepted_offer: "",
+                lead_manager_id: "",
+            }
+        },
 
+        methods: {
+            async addLead() {
+
+
+            },
+
+            async getStatuses() {
+                await this.$store.dispatch("getLeadStatuses")
+            }
+        },
+
+        created() {
+            this.getStatuses();
         }
     }
 }
@@ -332,7 +317,7 @@ export default {
 .center {
     margin: auto;
     width: 50%;
-   /* border: 3px solid #00bcd4; */
+    /* border: 3px solid #00bcd4; */
     padding: 10px;
 }
 .label-color{

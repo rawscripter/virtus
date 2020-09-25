@@ -1,4 +1,9 @@
 export default {
+
+    LEAD_STATUSES: (state, leadStatuses) =>{
+        state.leadStatuses =leadStatuses;
+    },
+
     STATUS_TYPE: (state,type) =>{
         state.statusType = type;
     },
@@ -30,5 +35,8 @@ export default {
 
     OFFER_ACCEPTED_TYPE: (state,type) =>{
         state.offerAcceptedType = type;
+    },
+    COMMUNICATION_TYPE:(state,type) =>{
+        state.communicationType = type;
     },
 };
