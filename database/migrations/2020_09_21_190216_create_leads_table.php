@@ -40,10 +40,6 @@ class CreateLeadsTable extends Migration
             $table->string('mortgage_amount')->nullable();
             $table->string('HOA')->nullable();
             $table->string('asking_price')->nullable();
-            $table->bigInteger('offer_made_id');
-            $table->string('offer_amount')->nullable();
-            $table->bigInteger('offer_accepted_id');
-            $table->string('accepted_offer')->nullable();
             $table->bigInteger('lead_manager_id')->nullable();;
             $table->timestamps();
         });

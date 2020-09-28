@@ -7,7 +7,7 @@
     :style="sidebarStyle"
   >
     <div class="logo">
-      <a href="@assets/images/logo" class="simple-text logo-mini" target="_blank">
+      <a href="/images/logo" class="simple-text logo-mini" target="_blank">
         <div style="padding: 4px 0;">
          VIG
         </div>
@@ -83,7 +83,7 @@ export default {
     },
     backgroundImage: {
       type: String,
-      default: `${process.env.VUE_APP_APP_BASE_URL}/img/sidebar-2.jpg`
+      default: `/images/avatar.jpg`
     },
     backgroundColor: {
       type: String,
@@ -95,7 +95,7 @@ export default {
     },
     logo: {
       type: String,
-      default: `${process.env.VUE_APP_APP_BASE_URL}/img/vue-logo.png`
+      default: '/images/logo.png'
     },
     sidebarLinks: {
       type: Array,

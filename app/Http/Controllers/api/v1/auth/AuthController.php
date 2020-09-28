@@ -8,6 +8,7 @@ use CloudCreativity\LaravelJsonApi\Document\Error;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AuthController
@@ -17,12 +18,18 @@ class AuthController
             'username' => 'required|string',
             'password' => 'required|string'
         ]);
-        $user = User::where('username', $login['username'])->first();
-        if($user) {
-            return $this->getToken($login, $user);
-        }else{
-            return response(['status'=>'error', 'message'=> 'User not found']);
+
+        if(Auth::attempt($login)) {
+            $user = User::where('username', $login['username'])->first();
+
+            if ($user) {
+                return $this->getToken($login, $user);
+            } else {
+                return response(['status' => 'error', 'message' => 'User not found'], 401);
+            }
         }
+
+        return response()->json(['error' => 'Unauthorised'], 401);
     }
 
 

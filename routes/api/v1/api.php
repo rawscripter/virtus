@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix('/users')->group(function () {
     Route::post('user/login', 'api\v1\auth\AuthController@login')->name('api.login');
     Route::post('user/register', 'api\v1\auth\AuthController@register')->name('api.register');
@@ -69,5 +68,9 @@ Route::prefix('/campaign')->group(function (){
     Route::get('/contacts/search/address', 'api\v1\CampaignController@searchByAddress')->name('search_campaign_contacts_address');
     Route::get('/types/all', 'api\v1\CampaignController@getCampaignTypes')->name('get_campaign_types');
     Route::get('/list', 'api\v1\CampaignController@list')->name('get_campaigns_list');
- //   Route::get('/{campaign}', 'api\v1\CampaignController@getCampaign')->name('get_campaign');
+    //   Route::get('/{campaign}', 'api\v1\CampaignController@getCampaign')->name('get_campaign');
 });
+
+
+
+\Illuminate\Support\Facades\Broadcast::routes();

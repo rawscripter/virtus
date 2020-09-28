@@ -2,15 +2,16 @@ import Client from '../../api-services/api-client';
 
 export default {
 
-
+    createLead(context, data){
+        console.log(data);
+    },
     getLeadStatuses(context){
         Client.get('/leads/type/getLeadStatuses').then(function (response){
-            console.log(response);
             context.commit('LEAD_STATUSES', response.data);
         });
     },
 
-    status (context, data){
+    g4status (context, data){
         Client.post('/leads/type/status', data).then(function (response){
             context.commit('STATUS_TYPE', response.data);
 

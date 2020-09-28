@@ -1,8 +1,8 @@
 import Client from '../../api-services/api-client';
 
 export default {
-    getUser(context, id) {
-        Client.get('/users/user?id='+id).then(function (response) {
+    getUser(context, data) {
+        Client.get('/users/user?id='+data.authIDd).then(function (response) {
             if(response.data) {
                 context.commit('USER', response.data.data);
             }else{

@@ -59,7 +59,7 @@ export default {
       isClosed: true,
       title: 'Profile',
       rtlTitle: "تانيا أندرو",
-      avatar: "@/assets/image/avatar.jpg"
+      avatar: "/images/avatar.jpg"
     };
   },
 

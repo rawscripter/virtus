@@ -4,8 +4,8 @@
       <img class="img" :src="cardUserImage"/>
     </div>
     <md-card-content>
-      <h6 class="category text-gray">CEO / Co-Founder</h6>
-      <h4 class="card-title">Alec Thompson</h4>
+      <h6 class="category text-gray">Co-Founder</h6>
+      <h4 class="card-title"> {{user.full_name}}</h4>
       <p class="card-description">
         Don't be scared of the truth because we need to restart the human
         foundation in truth And I love you like Kanye loves Kanye I love Rick
@@ -22,9 +22,10 @@
   export default {
     name: "user-profile-card",
     props: {
+        user: Object,
       cardUserImage: {
         type: String,
-        default: process.env.VUE_APP_APP_BASE_URL + "/img/faces/marc.jpg"
+        default: "/images/avatar.jpg"
       },
       buttonColor: {
         type: String,

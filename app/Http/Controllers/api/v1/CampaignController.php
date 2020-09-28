@@ -5,7 +5,6 @@ namespace App\Http\Controllers\api\v1;
 use App\Events\SearchEvent;
 use App\Http\Resources\CampaignListResource;
 use App\Http\Resources\PropertyAddressResource;
-use App\Http\Resources\CampaignResource;
 use App\Http\Resources\OwnerResource;
 use App\Models\PropertyAddress;
 use App\Models\Campaign;
@@ -70,7 +69,7 @@ class CampaignController extends Controller
             ->orWhere('last_name', 'like', '%' . $query . '%')
             ->paginate($perPage)
             ->appends($page);
-        //    event(new SearchEvent($campaignContact));
+           event(new SearchEvent($campaignContact));
         return OwnerResource::collection($campaignContact);
     }
 

@@ -65,7 +65,7 @@
 
     data() {
       return {
-        default_img: process.env.VUE_APP_APP_BASE_URL + "/img/placeholder.jpg",
+        default_img: "/images/avatar.jpg",
       }
     },
 

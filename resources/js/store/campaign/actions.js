@@ -6,7 +6,6 @@ export default {
 
     getRecentlyUpdatedLeads(context) {
         Client.get('/campaign/recent').then(function (response){
-            console.log(response);
            if(response.data!=''){
                context.commit('RECENT_LEADS', response.data);
            } else {
@@ -16,10 +15,7 @@ export default {
     },
 
     getAllCampaigns(context){
-        console.log('getting all campaigns');
         Client.get('/campaign/all').then(function (response) {
-            console.log('is in response');
-            console.log(response);
             if(response.data!="") {
                 context.commit('CAMPAIGNS', response.data);
             }else{
@@ -89,7 +85,6 @@ export default {
     getCampaignContact(context, id) {
         Client.get('campaign/contact/search/id?id='+id).then(function (response) {
             if(response){
-                console.log(response.data);
                 context.commit('SET_CAMPAIGN_CONTACT', response.data);
             } else {
                 console.log("response data empty");

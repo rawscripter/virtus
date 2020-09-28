@@ -237,8 +237,6 @@ export default {
     },
 
     async created() {
-
-        await this.$store.dispatch('getLeadEnums');
         await this.$store.dispatch("getAllCampaigns");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
         window.Echo.channel('search')

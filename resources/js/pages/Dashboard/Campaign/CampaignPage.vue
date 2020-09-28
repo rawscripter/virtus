@@ -178,7 +178,6 @@ export default {
 
     watch :{
         campaigns: function (){
-            console.log('updated')
         },
 
         campaignContacts: function (e) {
@@ -240,7 +239,8 @@ export default {
     async created() {
         await this.$store.dispatch("getAllCampaigns");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
-        window.Echo.channel('search')
+        console.log("should do search now")
+        Echo.channel('search')
             .listen('.searchResults', (e) => {
                 console.log('results listening' + e)
                 this.$store.commit('SET_CAMPAIGN_CONTACTS', e.campaignContacts)

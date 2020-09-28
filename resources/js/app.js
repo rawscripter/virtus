@@ -31,6 +31,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$Chartist = Chartist;
 
 
+
+
 /* eslint-disable no-new */
 const app = new Vue({
     router: router,
