@@ -19,6 +19,8 @@ import UserEditCard from "@/pages/Dashboard/Profile/UserProfile/EditProfileCard.
 import UserPasswordCard from "@/pages/Dashboard/Profile/UserProfile/EditPasswordCard.vue";
 import UserProfileCard from "@/pages/Dashboard/Profile/UserProfile/UserProfileCard.vue";
 
+import {mapGetters} from 'vuex'
+
 export default {
     name: "user-profile",
 
@@ -28,9 +30,12 @@ export default {
         "user-password-card": UserPasswordCard
     },
 
-    data: () => ({
-        user: null
-    }),
+
+    computed: {
+        ...mapGetters({
+            user: 'user',
+        }),
+    },
 
     watch:{
         user: function (e) {
@@ -43,9 +48,8 @@ export default {
     },
 
     methods: {
-        async getProfile() {
-            await this.$store.dispatch("getUser",this.$store.getters['AUTH_ID'] )
-            this.user = await this.$store.getters["user"]
+        getProfile() {
+            this.$store.dispatch("getUser", this.$store.getters['AUTH_ID'] )
         }
     }
 }

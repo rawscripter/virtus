@@ -134,6 +134,10 @@
     padding: 10px;
 }
 
+.profile-nav{
+    display: block !important;
+}
+
 .navbar-vig-color {
     background-color: #039be5 !important;
 

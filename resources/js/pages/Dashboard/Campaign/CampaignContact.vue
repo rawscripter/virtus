@@ -2,175 +2,111 @@
     <div class="md-layout main-containter">
         <!---left -->
         <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-40">
-            <md-card class="md-primary" md-theme="black-card">
-                <md-card-header>
-                    <stats-card header-color="rose">
-                        <template slot="header">
-                            <div class="card-icon">
-                                <md-icon>account_box</md-icon>
+            <div class="row gutters-sm">
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ activeContact.contact.full_name }}
+                                </div>
                             </div>
-                            <h3 class="title">
-                                Seller Info
-                            </h3>
-                        </template>
-
-                    </stats-card>
-                </md-card-header>
-                <md-card-content>
-                    <md-field>
-                        <label>First Name</label>
-                        <md-input v-model="activeContact.contact.first_name" readonly></md-input>
-                    </md-field>
-
-                    <md-field>
-                        <label>Last Name</label>
-                        <md-input v-model="activeContact.contact.last_name" readonly></md-input>
-                    </md-field>
-
-                    <md-field>
-                        <label>Mailing Address</label>
-                        <md-input v-model="activeContact.mailing.street"></md-input>
-                        <span class="md-helper-text">Helper text</span>
-                    </md-field>
-
-                    <md-field>
-                        <label>Mailing City</label>
-                        <md-input v-model="activeContact.mailing.city"></md-input>
-                    </md-field>
-
-                    <md-field md-inline>
-                        <label>Mailing State</label>
-                        <md-input v-model="activeContact.mailing.state"></md-input>
-                    </md-field>
-
-                    <md-field>
-                        <label>Mailing Zip</label>
-                        <md-input v-model="activeContact.mailing.zip" type="number"></md-input>
-                    </md-field>
-
-                </md-card-content>
-            </md-card>
-
-            <md-card class="md-primary" md-theme="black-card">
-                <md-card-header>
-                    <stats-card header-color="rose">
-                        <template slot="header">
-                            <div class="card-icon">
-                                <md-icon>account_box</md-icon>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mailing Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                <span>
+                                  {{activeContact.mailing.street}}, {{activeContact.mailing.city}}  {{activeContact.mailing.state}},  {{activeContact.mailing.zip}}
+                                </span>
+                                </div>
                             </div>
-                            <h3 class="title">
-                                Contact Numbers
-                            </h3>
-                        </template>
-
-                    </stats-card>
-                </md-card-header>
-                <md-card-content v-for="phones in activeContact.phones"  :key="phones.id">
-                    <md-field v-for="(index, key) in phones" :key="index.phone + key">
-                        <label>Phone {{key +1}}</label>
-                        <md-input :value="index.phone" readonly></md-input>
-                        {{index.phone_type}}
-                    </md-field>
-                </md-card-content>
-            </md-card>
-
-            <!-- PROPERTY DETAILS CARD -->
-            <md-card class="md-primary" md-theme="black-card" v-model="activeContact.addresses">
-                <md-card-header>
-                    <stats-card header-color="rose">
-                        <template slot="header">
-                            <div class="card-icon">
-                                <md-icon>home</md-icon>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    fip@jukmuh.al
+                                </div>
                             </div>
-                            <h3 class="title">
-                                Property Info
-                            </h3>
-                        </template>
-
-                    </stats-card>
-                </md-card-header>
-
-
-
-                <md-card v-for="properties in activeContact.addresses" :key="properties.id">
-                    <md-card-header class="md-card-header-text md-card-header-warning">
-                        <div class="card-text">
-                            <p class="category">
-                                <md-button class="md-raised md-success">{{ properties[0]['full_address'] }}</md-button>
-
-                                <a :href="getZlink(properties[0]['full_address'])" target="_blank">View On Zillow</a>
-                            </p>
+                            <hr>
+                            <div class="row" v-for="(phones, count) in activeContact.phones[0]"  :key="phones.id">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">{{phones.phone_type}}</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{formatPhoneNumber(phones.phone) }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                                </div>
+                            </div>
                         </div>
-                    </md-card-header>
-                    <md-card-expand>
-                        <md-card-actions class="md-alignment-left">
-                            <md-card-expand-trigger>
-                                <md-button class="md-icon-button">
-                                    <md-icon>keyboard_arrow_down</md-icon>
-                                </md-button>
-                            </md-card-expand-trigger>
+                    </div>
 
-                            <md-card-expand-content>
-                                <md-table table-header-color="orange" >
-                                    <span v-for="property in properties" :key="property.id">
+                    <div class="row gutters-sm">
+                        <div class="col-sm mb">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-4"><i class="material-icons text-info mr-3">map</i>Property Addresses</h6>
+                                    <div v-for="properties in activeContact.addresses" :key="properties.id">
+                                        <small>{{ properties[0].full_address }}</small>
+                                        <small class="mb-4" style="height: 30px">
+                                            <a class="float-right" :href="getZlink(properties[0]['full_address'])" target="_blank">View On Zillow</a>
+                                        </small>
 
-                                      <md-table-row slot="md-table-row">
-                                          <md-table-cell md-label="Details" style="width: 100%">
-                                              <md-field>
-                                              <label>Property Details:</label>
-                                              <md-textarea  v-if="property.details!=null" :value="property.details[0]['details']"></md-textarea>
-                                              <md-textarea v-else ></md-textarea>
-                                              </md-field>
-                                          </md-table-cell>
-                                            <md-button class="md-just-icon md-simple md-primary">
-                                                <md-icon>edit</md-icon>
-                                                <md-tooltip md-direction="top">Edit</md-tooltip>
-                                            </md-button>
-                                            <md-button class="md-just-icon md-simple md-danger">
-                                                <md-icon>close</md-icon>
-                                                <md-tooltip md-direction="top">Close</md-tooltip>
-                                            </md-button>
-                                        </md-table-row>
-                                        </span>
-                                </md-table>
-
-                                <md-list class="" v-for="property in properties" :key="property.id">
-                                    <md-list-item v-for="owner in property.owners" :key="owner.id">
-                                        <md-avatar>
-                                            <img src="https://placeimg.com/40/40/people/1" alt="People">
-                                        </md-avatar>
-                                        <md-field>
-                                            <md-input :value="owner.first_name + ' ' + owner.last_name">{{owner.first_name}} {{owner.last_name}}</md-input>
+                                        <md-field :class="messageClass">
+                                            <label>Property Details:</label>
+                                            <md-textarea v-model="textarea" v-for="property in properties[0].details" :key="property.id" >{{ property.details}} </md-textarea>
+                                            <span class="md-helper-text">Helper text</span>
+                                            <span class="md-error">There is an error</span>
                                         </md-field>
-                                        <md-button class="md-just-icon md-list-action">
-                                            <md-icon>edit</md-icon>
-                                            <md-tooltip md-direction="top">Edit</md-tooltip>
-                                        </md-button>
-                                        <md-button class="md-just-icon md-list-action">
-                                            <md-icon>close</md-icon>
-                                            <md-tooltip md-direction="top">Close</md-tooltip>
-                                        </md-button>
-                                    </md-list-item>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <md-divider class="md-inset"></md-divider>
-                                </md-list>
-                            </md-card-expand-content>
 
-                        </md-card-actions>
 
-                    </md-card-expand>
-                </md-card>
-            </md-card>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card mt-3">
+                        <md-card class="md-primary" md-theme="black-card">
+                            <md-card-header>
+                                <stats-card header-color="green">
+                                    <template slot="header">
+                                        <div class="card-icon">
+                                            <md-icon>rule</md-icon>
+                                        </div>
+                                        <h3 class="title">
+                                            Lead Status
+                                        </h3>
+                                    </template>
 
-            <md-card class="md-primary" md-theme="black-card">
-                <md-card-area>
-                    map goes here
-                </md-card-area>
-            </md-card>
+                                </stats-card>
+                            </md-card-header>
+                            <md-card-content>
+                                <md-field v-for=" item in leadStatus" :key="item.status">
+                                    <md-checkbox :value="item.status" v-model="setStatus">{{ item.status }}</md-checkbox>
+                                </md-field>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
         </div>
         <!---middle -->
         <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-            <md-card class="md-primary" md-theme="black-card">
+<!--            <md-card class="md-primary" md-theme="black-card">
                 <md-card-header>
                     <stats-card header-color="green">
                         <template slot="header">
@@ -189,12 +125,12 @@
                         <md-checkbox :value="item.status" v-model="setStatus">{{ item.status }}</md-checkbox>
                     </md-field>
                 </md-card-content>
-            </md-card>
+            </md-card>-->
         </div>
 
         <!---right -->
         <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-            <md-card class="md-primary" md-theme="black-card">
+<!--            <md-card class="md-primary" md-theme="black-card">
                 <md-card-header>
                     <stats-card header-color="blue">
                         <template slot="header">
@@ -253,7 +189,7 @@
                         </md-table-row>
                     </md-table>
                 </md-card-content>
-            </md-card>
+            </md-card>-->
         </div>
     </div>
 </template>
@@ -277,7 +213,12 @@ export default {
     computed:{
         ...mapGetters({
             activeContact: 'activeContact'
-        })
+        }),
+        messageClass() {
+            return {
+                'md-invalid': this.hasMessages
+            }
+        }
     },
     data(){
         return {
@@ -298,12 +239,17 @@ export default {
             setActiveTab:1,
             pillsActive: 0,
             selectedProperty:true,
+            noError: null,
+            required: null,
+            textarea: null,
+            hasMessages: false
 
         }
     },
+
     methods:{
         getZlink(property){
-            return "https://www.zillow.com/homes/" +property+'-_rb/'
+            return "https://www.zillow.com/homes/" +property+'_rb/'
         },
 
         selectProperty(){
@@ -314,6 +260,14 @@ export default {
             this.infoTab=tabIndex
         },
 
+        formatPhoneNumber(phoneNumberString) {
+            let cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+            let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+            if (match) {
+                return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+            }
+            return null;
+        }
     },
 
     created() {

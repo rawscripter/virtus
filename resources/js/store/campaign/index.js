@@ -4,6 +4,9 @@ import mutations from './mutations';
 
 const state = {
     activeContact:null,
+    address:null,
+    markets: null,
+    marketsLoaded: null,
     campaign:null,
     campaigns:null,
     campaignTypes:null,
@@ -11,7 +14,8 @@ const state = {
     campaignContacts:null,
     campaignLoaded:null,
     campaignTypeLoaded:null,
-    recentLeads:null
+    recentLeads:null,
+    owners: null
 };
 
 export default {

@@ -13,6 +13,12 @@ class Phone extends Model
         'phone4_type',
         'phone5_type',
         'phone6_type',
+        'phone1_tag',
+        'phone2_tag',
+        'phone3_tag',
+        'phone4_tag',
+        'phone5_tag',
+        'phone6_tag',
         'phone1',
         'phone2',
         'phone3',
@@ -29,4 +35,8 @@ class Phone extends Model
     {
         return $this->belongsToMany(Owner::class, 'owner_phones', 'phone_id', 'owner_id');
     }
+
+    /**
+     * The Tag for a Phone
+     */
 }

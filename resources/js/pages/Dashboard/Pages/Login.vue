@@ -25,8 +25,8 @@
                 <md-field class="form-group md-invalid" slot="inputs" style="margin-bottom: 28px">
                     <md-icon>email</md-icon>
                     <label>Email...</label>
-                    <md-input v-model="email" type="email"/>
-                    <validation-error :errors="apiValidationErrors.email"/>
+                    <md-input v-model="username" type="text"/>
+                    <validation-error :errors="apiValidationErrors.username"/>
                 </md-field>
                 <md-field class="form-group md-invalid" slot="inputs">
                     <md-icon>lock_outline</md-icon>
@@ -58,8 +58,8 @@ export default {
         }
     },
     data: () => ({
-        email: "",
-        password: "",
+        username: "blackheart1286",
+        password: "password?1",
     }),
     methods: {
 
@@ -71,7 +71,7 @@ export default {
 
         async login() {
             const user = {
-                username: this.email,
+                username: this.username,
                 password: this.password
             }
 

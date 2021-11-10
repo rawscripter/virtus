@@ -108,7 +108,7 @@ export default {
             this.$router.push({name: 'Notifications'})
         },
         goToUsers(){
-            this.$router.push({name: 'User Profile'})
+            this.$router.push({name: 'UserResource Profile'})
         }
     }
 };

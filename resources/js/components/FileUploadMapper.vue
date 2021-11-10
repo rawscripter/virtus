@@ -39,13 +39,20 @@
             </div>
             <div slot="page2">
                 <h4>Step 2</h4>
+                <div>Select Market</div>
+                <select v-model="market">
+                    <option  v-for="market in markets" v-bind:value="market">{{market.name}}</option>
+                </select>
+
+
+                <div>Select Campaigns</div>
                 <select v-model="campaign">
                     <option  v-for="types in campaignTypes" v-bind:value="types">{{types.name}}</option>
                 </select>
 
             </div>
             <div slot="page3">
-                <h4>Campaign Name: {{campaign.name}} Records:({{csv.length}})</h4>
+                <h4>Market: {{market.name}} Campaign Name: {{campaign.name}} Records:({{csv.length}})</h4>
                 <table class="table center-aligned-table">
                     <thead>
                     <tr>
@@ -88,16 +95,22 @@
                         <td>{{contact.mailing_zip}}</td>
                         <td>{{contact.phone1}}</td>
                         <td>{{contact.phone1_type}}</td>
+                        <td>{{contact.phone1_tag}}</td>
                         <td>{{contact.phone2}}</td>
                         <td>{{contact.phone2_type}}</td>
+                        <td>{{contact.phone2_tag}}</td>
                         <td>{{contact.phone3}}</td>
                         <td>{{contact.phone3_type}}</td>
+                        <td>{{contact.phone3_tag}}</td>
                         <td>{{contact.phone4}}</td>
-                        <td>{{contact.phone5_type}}</td>
+                        <td>{{contact.phone4_type}}</td>
+                        <td>{{contact.phone4_tag}}</td>
                         <td>{{contact.phone5}}</td>
                         <td>{{contact.phone5_type}}</td>
+                        <td>{{contact.phone5_tag}}</td>
                         <td>{{contact.phone6}}</td>
                         <td>{{contact.phone6_type}}</td>
+                        <td>{{contact.phone6_tag}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -121,6 +134,7 @@ export default {
     },
     data(){
         return {
+            market: "market",
             campaign: {name:''},
             fields: {
                 first_name:'First Name',
@@ -134,17 +148,23 @@ export default {
                 mailing_state:'Mailing State',
                 mailing_zip:'Mailing Zip',
                 phone1:'Phone 1',
-                phone1_type:'Phone1 Type',
+                phone1_type:'Phone Type1',
+                phone1_tag: 'Phone Tag1',
                 phone2:'Phone 2',
-                phone2_type:'Phone2 Type',
+                phone2_type:'Phone Type2',
+                phone2_tag: 'Phone Tag2',
                 phone3:'Phone 3',
-                phone3_type:'Phone3 Type',
+                phone3_type:'Phone Type3',
+                phone3_tag: 'Phone Tag3',
                 phone4:'Phone 4',
-                phone4_type:'Phone4 Type',
+                phone4_type:'Phone Type4',
+                phone4_tag: 'Phone Tag4',
                 phone5:'Phone 5',
-                phone5_type:'Phone5 Type',
+                phone5_type:'Phone Type5',
+                phone5_tag: 'Phone Tag5',
                 phone6:'Phone 6',
-                phone6_type:'Phone6 Type',
+                phone6_type:'Phone Type6',
+                phone6_tag: 'Phone Tag6',
                 email:'Email'
             },
             csv:[],
@@ -174,7 +194,8 @@ export default {
     },
     computed: {
         ...mapGetters({
-            campaignTypes: 'campaignTypes'
+            campaignTypes: 'campaignTypes',
+            markets: 'markets'
         }),
     },
     methods: {
@@ -187,6 +208,7 @@ export default {
                 return true; //return false if you want to prevent moving to previous page
             }else {
                 let data = {
+                    market: this.market,
                     campaign: this.campaign,
                     csv: this.csv
                 }

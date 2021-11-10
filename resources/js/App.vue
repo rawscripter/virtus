@@ -14,4 +14,5 @@ export default {}
 
 <style lang="scss">
 @import "assets/css/style/style.css";
+@import "assets/css/style/dashboard.css";
 </style>

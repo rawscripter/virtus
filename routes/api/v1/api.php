@@ -59,18 +59,33 @@ Route::prefix('/leads')->group(function (){
 
 Route::prefix('/campaign')->group(function (){
     Route::post('/create', 'api\v1\CampaignController@create')->name('create_campaign');
+    Route::post('/market/create', 'api\v1\CampaignController@createMarket')->name('create_market');
     Route::post('/type/create', 'api\v1\CampaignController@createCampaignType')->name('create_campaign_type');
+    Route::get('/market/all', 'api\v1\CampaignController@markets')->name('get_markets');
     Route::get('/all', 'api\v1\CampaignController@index')->name('get_campaigns');
     Route::get('/recent', 'api\v1\CampaignController@recent')->name('get_recent_campaigns');
+    Route::get('/contacts/search', 'api\v1\CampaignController@search')->name('search');
     Route::get('/contact/search/id', 'api\v1\CampaignController@searchCampaignById')->name('search_contact_by_id');
     Route::get('/contacts/search/campaign', 'api\v1\CampaignController@searchByCampaign')->name('search_contacts_by_campaign');
     Route::get('/contacts/search/owner', 'api\v1\CampaignController@searchByOwner')->name('search_campaign_contacts_owner');
-    Route::get('/contacts/search/address', 'api\v1\CampaignController@searchByAddress')->name('search_campaign_contacts_address');
     Route::get('/types/all', 'api\v1\CampaignController@getCampaignTypes')->name('get_campaign_types');
     Route::get('/list', 'api\v1\CampaignController@list')->name('get_campaigns_list');
     //   Route::get('/{campaign}', 'api\v1\CampaignController@getCampaign')->name('get_campaign');
 });
 
+Route::prefix('/owners')->group(function(){
+    Route::get('/all', 'api\v1\AddressController@index')->name('getAllOwners');
+    Route::get('/filter', 'api\v1\OwnerController@filterOwners')->name('filter_by_owners');
+});
 
+
+Route::prefix('/property')->group(function(){
+    Route::get('/addresses', 'api\v1\AddressController@index')->name('getAllAddresses');
+    Route::get('/addresses/filter', 'api\v1\AddressController@filterAddresses')->name('filter_by_address');
+});
+
+Route::prefix('/search')->group(function(){
+    Route::get('/any', 'api\v1\SearchController@search')->name('search');
+});
 
 \Illuminate\Support\Facades\Broadcast::routes();

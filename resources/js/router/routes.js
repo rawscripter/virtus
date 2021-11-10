@@ -19,6 +19,11 @@ import CampaignContact from "@pages/Dashboard/Campaign/CampaignContact";
 import AddCampaign from "@pages/Dashboard/Campaign/AddCampaign";
 import CampaignContacts from "@pages/Dashboard/Campaign/Contacts";
 
+
+//Properties
+
+import Addresses from "../pages/Dashboard/Property/Addresses";
+
 //Lead
 import Leads from "@pages/Dashboard/Lead/Leads";
 import AddLead from "@pages/Dashboard/Lead/AddLead";
@@ -106,7 +111,7 @@ let userMenu = {
     children: [
         {
             path: "user-profile",
-            name: "User Profile",
+            name: "UserResource Profile",
             components: { default: UserProfile },
             meta: { middleware: auth }
         },
@@ -148,6 +153,19 @@ let campaignMenu = {
 };
 
 
+let propertyMenu = {
+    path: "/property",
+    component: DashboardLayout,
+    name: "Property",
+    children:[
+        {
+            path: "addresses",
+            name: "Addresses",
+            components: { default: Addresses },
+            meta: { middleware: auth }
+        },
+    ]
+};
 
 let leadMenu ={
     path: "/lead",
@@ -255,7 +273,8 @@ const routes = [
     authPages,
     mainpages,
     campaignMenu,
-    leadMenu
+    leadMenu,
+    propertyMenu
 ];
 
 export default routes;

@@ -21,7 +21,6 @@ class CreateOwnerCampaignsTable extends Migration
             $table->unsignedBigInteger('campaign_id')->nullable();
             $table->foreign('campaign_id')->references('id')
                 ->on('campaigns')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

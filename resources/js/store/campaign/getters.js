@@ -1,5 +1,9 @@
 export default {
     activeContact: state => state.activeContact,
+    addresses: state =>state.addresses,
+    owners: state => state.owners,
+    markets: state => state.markets,
+    marketsLoaded: state => state.marketsLoaded,
     campaign: state => state.campaign,
     campaigns: state => state.campaigns,
     campaignTypes: state => state.campaignTypes,

@@ -17,16 +17,22 @@ class CreatePhonesTable extends Migration
             $table->bigIncrements('id');
             $table->string('phone1')->nullable();
             $table->string('phone1_type')->nullable();
+            $table->string('phone1_tag')->nullable();
             $table->string('phone2')->nullable();
             $table->string('phone2_type')->nullable();
+            $table->string('phone2_tag')->nullable();
             $table->string('phone3')->nullable();
             $table->string('phone3_type')->nullable();
+            $table->string('phone3_tag')->nullable();
             $table->string('phone4')->nullable();
             $table->string('phone4_type')->nullable();
+            $table->string('phone4_tag')->nullable();
             $table->string('phone5')->nullable();
             $table->string('phone5_type')->nullable();
+            $table->string('phone5_tag')->nullable();
             $table->string('phone6')->nullable();
             $table->string('phone6_type')->nullable();
+            $table->string('phone6_tag')->nullable();
             $table->timestamps();
         });
     }

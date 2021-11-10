@@ -6,10 +6,16 @@
                     <md-card-content v-if="loadPage">
                         <div class="md-layout">
                             <div class="md-layout-item md-small-size-100"  >
+                                <div class="md-form-group md-invalid" style="margin-bottom: 2rem">
+                                    <md-icon>face</md-icon>
+                                    <label  class="label-color">Search Lead In Contact</label>
+                                    <md-autocomplete  v-model="searchValue"  :md-options="searchOptions" @select="fillLeadInputs" required/>
+                                </div>
+
                                 <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
                                     <md-icon>face</md-icon>
                                     <label  class="label-color">First Name</label>
-                                    <md-input v-model="lead.first_name" required/>
+                                    <md-input  v-model="lead.first_name"  required/>
                                 </md-field>
 
                                 <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
@@ -238,48 +244,69 @@ export default {
     data() {
         return {
             loadPage:false,
-           lead: {
-               owner_id: "",
-               first_name: "",
-               last_name: "",
-               email: "",
-               phone_number: "",
-               communication_type_id: "",
-               other_owner_info: "",
-               property_address: "",
-               property_city: "",
-               property_state: "",
-               property_zip: "",
-               property_site_link: "",
-               lead_status_id: "",
-               lead_status_notes: "",
-               contact_stage_id: "",
-               lead_temperature_id: "",
-               follow_up_type_id: "",
-               follow_up_date: "",
-               occupancy_id: "",
-               occupancy_details: "",
-               property_details: "",
-               reason_to_sell: "",
-               mortgage_amount: "",
-               HOA: "",
-               asking_price: "",
-               offer_made_id: "",
-               offer_amount: "",
-               offer_accepted_id: "",
-               accepted_offer: "",
-               lead_manager_id: "",
-           }
+            searchOptions:[],
+            contacts:[],
+            searchValue:'',
+            lead: {
+                owner_id: "",
+                first_name: "",
+                last_name: "",
+                email: "",
+                phone_number: "",
+                communication_type_id: "",
+                other_owner_info: "",
+                property_address: "",
+                property_city: "",
+                property_state: "",
+                property_zip: "",
+                property_site_link: "",
+                lead_status_id: "",
+                lead_status_notes: "",
+                contact_stage_id: "",
+                lead_temperature_id: "",
+                follow_up_type_id: "",
+                follow_up_date: "",
+                occupancy_id: "",
+                occupancy_details: "",
+                property_details: "",
+                reason_to_sell: "",
+                mortgage_amount: "",
+                HOA: "",
+                asking_price: "",
+                offer_made_id: "",
+                offer_amount: "",
+                offer_accepted_id: "",
+                accepted_offer: "",
+                lead_manager_id: "",
+            }
         }
     },
 
     watch:{
-        lead: function () {
-            console.log(this.lead)
+        'lead.first_name': function (e) {
+
+        },
+
+        'lead.last_name': function (e) {
+        },
+
+        searchValue: function (e){
+            this.$store.dispatch('search', {perPage: 10, query:e, type: 'owner'});
+            console.log('rain')
+            console.log(e)
+            let id= e.substring(0,1)
+            console.log(id)
+            console.log(this.contacts)
         }
+
     },
 
     methods: {
+
+        fillLeadInputs(){
+        console.log('ready to fill')
+        },
+
         async addLead() {
             console.log(this.lead)
             await this.$store.dispatch("createLead", this.lead);
@@ -318,8 +345,22 @@ export default {
     },
 
     created() {
-        console.log(this.lead)
         this.getStatuses();
+    },
+
+    mounted() {
+        Echo.channel('search')
+            .listen('.searchResults', (e) => {
+               let array = []
+                let original= []
+                e.campaignContact.data.forEach(function (contact){
+                    array.push(contact.id + '. ' + contact.first_name + ' ' + contact.last_name)
+                    array.push(contact.id + '. ' + contact.first_name + ' ' + contact.last_name)
+                }.bind(this))
+
+                this.contacts = array;
+                this.searchOptions = array;
+            })
     }
 }
 </script>

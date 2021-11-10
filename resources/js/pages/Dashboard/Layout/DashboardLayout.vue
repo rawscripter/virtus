@@ -2,8 +2,8 @@
     <div
         class="wrapper"
         :class="[
-      { 'nav-open': false },
-      { rtl: $route.meta.rtlActive }
+      { 'nav-open': true },
+            { rtl: $route.meta.rtlActive }
     ]"
     >
         <notifications></notifications>
@@ -15,9 +15,8 @@
             <user-menu></user-menu>
             <mobile-menu></mobile-menu>
             <template slot="links">
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'لوحة القيادةة', icon: 'dashboard', path: '/dashboard'}" />
-                <sidebar-item v-else :link="{ name: 'Dashboard', icon: 'dashboard', path: '/dashboard' }" />
+                <sidebar-item :link="{ name: 'Dashboard', icon: 'dashboard', path: '/dashboard' }" />
+                <sidebar-item :link="{ name: 'Addresses', icon: 'map', path: '/property/addresses'}" />
                 <sidebar-item :link="{ name: 'Contacts', icon: 'phone', path: '/campaign/contacts'}" />
                 <sidebar-item :link="{ name: 'Campaigns', icon: 'list', path: '/campaign/campaign-list'}" />
                 <sidebar-item :link="{ name: 'Leads', icon: 'fact_check', path: '/lead/leads'}" />
@@ -29,38 +28,15 @@
                     <sidebar-item :link="{ name: 'Campaign Management', path: '/admin/list-management/list-campaigns'}" />
                     <sidebar-item :link="{ name: 'User Management', path: '/admin/user-management/list-users'}" />
                 </sidebar-item>
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'الجداول', icon: 'content_paste', path: '/components/table' }" />
-                <sidebar-item :link="{ name: 'Table Lists', icon: 'content_paste', path: '/components/table' }" />
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'طباعة', icon: 'library_books', path: '/components/typography' }" />
-                <sidebar-item v-else :link="{ name: 'Typography', icon: 'library_books', path: '/components/typography' }" />
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'الرموز', icon: 'bubble_chart', path: '/components/icons' }" />
-                <sidebar-item v-else :link="{ name: 'Icons', icon: 'bubble_chart', path: '/components/icons' }" />
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'خرائط جوجل', icon: 'place', path: '/components/maps' }" />
-                <sidebar-item v-else :link="{ name: 'Maps', icon: 'place', path: '/components/maps' }"/>
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'إخطارات', icon: 'notifications', path: '/components/notifications' }" />
-                <sidebar-item v-else :link="{ name: 'Notifications', icon: 'notifications', path: '/components/notifications' }" />
-
-                <sidebar-item v-if="$route.meta.rtlActive" :link="{ name: 'دعم رتل', icon: 'language', path: '/components/rtl' }" />
-                <sidebar-item v-else :link="{ name: 'RTL Support', icon: 'language', path: '/components/rtl'}" />
-
             </template>
 
-            <div style="width: 100%; position: absolute; bottom: 0; padding: 16px">
-                <md-button v-if="sidebarMini" class="md-button md-danger md-block" href="#" target="_blank">
-                    Logout
-                </md-button>
-            </div>
+
 
         </side-bar>
 
         <div class="main-panel">
             <top-navbar></top-navbar>
-
+            <!--
             <fixed-plugin
                 :color.sync="sidebarBackground"
                 :colorBg.sync="sidebarBackgroundColor"
@@ -69,7 +45,7 @@
                 :image.sync="sidebarBackgroundImage"
             >
             </fixed-plugin>
-
+            -->
             <div
                 :class="{ content: !$route.meta.hideContent }"
             >

@@ -20,6 +20,7 @@ export default {
                 isAuthenticated: vueAuth.isAuthenticated()
             });
             if(response.data.access_token) {
+                context.commit('USER', response.data.user);
                 context.commit('AUTH_ID', {
                     authID: response.data.user.id
                 });

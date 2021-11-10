@@ -22,4 +22,8 @@ class PropertyAddress extends Model
     {
         return $this->hasOne(PropertyDetail::class);
     }
+
+    public function markets(){
+        return $this->belongsToMany(Market::class, 'market_properties', 'property_address_id', 'market_id');
+    }
 }

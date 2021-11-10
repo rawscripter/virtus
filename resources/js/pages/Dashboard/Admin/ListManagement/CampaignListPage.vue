@@ -9,6 +9,210 @@
                             <div class="card-icon">
                                 <md-icon>assignment</md-icon>
                             </div>
+                            <h4 class="title">Market</h4>
+                        </md-card-header>
+                        <md-card-content>
+                            <div class="text-right">
+                                <md-card-content>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item md-small-size-100 md-size-30">
+                                            <md-field>
+                                                <label>Add New Market</label>
+                                                <md-input v-model='marketName'></md-input>
+                                                <md-button class="md-primary md-dense" @click="addMarket">
+                                                    Add Campaign
+                                                </md-button>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                            </div>
+                            <md-table
+                                :value="markets"
+                                :md-sort.sync="sortation.field"
+                                :md-sort-order.sync="sortation.order"
+                                :md-sort-fn="customSort"
+                                class="paginated-table table-striped table-hover"
+                            >
+                                <md-table-row slot="md-table-row" slot-scope="{ item }">
+                                    <md-table-cell md-label="Name" md-sort-by="name">{{item.name}}</md-table-cell>
+                                    <md-table-cell md-label="Created At" md-sort-by="created_at">{{item.created}}</md-table-cell>
+                                    <md-table-cell md-label="Actions">
+                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>edit</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>delete</md-icon>
+                                        </md-button>
+                                    </md-table-cell>
+                                </md-table-row>
+                            </md-table>
+                        </md-card-content>
+
+                    </md-card>
+                </div>
+
+
+                <div class="md-layout-item md-size-100">
+                    <md-card>
+                        <md-card-header class="md-card-header-icon md-card-header-rose">
+                            <div class="card-icon">
+                                <md-icon>assignment</md-icon>
+                            </div>
+                            <h4 class="title">Lead Stage Types</h4>
+                        </md-card-header>
+                        <md-card-content>
+                            <div class="text-right">
+                                <md-card-content>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item md-small-size-100 md-size-30">
+                                            <md-field>
+                                                <label>Add Lead Stage Type</label>
+                                                <md-input v-model='type'></md-input>
+                                                <md-button class="md-primary md-dense" @click="addType('stage')">
+                                                    Add Stage Type
+                                                </md-button>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                            </div>
+                            <md-table
+                                :value="leadStatuses.stage.data"
+                                :md-sort.sync="sortation.field"
+                                :md-sort-order.sync="sortation.order"
+                                :md-sort-fn="customSort"
+                                class="paginated-table table-striped table-hover"
+                            >
+                                <md-table-row slot="md-table-row" slot-scope="{ item }">
+                                    <md-table-cell md-label="Name" md-sort-by="name">{{item.stages_type}}</md-table-cell>
+                                    <md-table-cell md-label="Created At" md-sort-by="created_at">{{item.created_at}}</md-table-cell>
+                                    <md-table-cell md-label="Actions">
+                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>edit</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>delete</md-icon>
+                                        </md-button>
+                                    </md-table-cell>
+                                </md-table-row>
+                            </md-table>
+                        </md-card-content>
+
+                    </md-card>
+                </div>
+
+
+                <div class="md-layout-item md-size-100">
+                    <md-card>
+                        <md-card-header class="md-card-header-icon md-card-header-green">
+                            <div class="card-icon">
+                                <md-icon>assignment</md-icon>
+                            </div>
+                            <h4 class="title">Lead Status Type</h4>
+                        </md-card-header>
+                        <md-card-content>
+                            <div class="text-right">
+                                <md-card-content>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item md-small-size-100 md-size-30">
+                                            <md-field>
+                                                <label>Add Lead Status Type</label>
+                                                <md-input v-model='type'></md-input>
+                                                <md-button class="md-primary md-dense" @click="addType('leadStatus')">
+                                                    Add Status Type
+                                                </md-button>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                            </div>
+                            <md-table
+                                :value="leadStatuses.status.data"
+                                :md-sort.sync="sortation.field"
+                                :md-sort-order.sync="sortation.order"
+                                :md-sort-fn="customSort"
+                                class="paginated-table table-striped table-hover"
+                            >
+                                <md-table-row slot="md-table-row" slot-scope="{ item }">
+                                    <md-table-cell md-label="Name" md-sort-by="name">{{item.status_type}}</md-table-cell>
+                                    <md-table-cell md-label="Created At" md-sort-by="created_at">{{item.created_at}}</md-table-cell>
+                                    <md-table-cell md-label="Actions">
+                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>edit</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>delete</md-icon>
+                                        </md-button>
+                                    </md-table-cell>
+                                </md-table-row>
+                            </md-table>
+                        </md-card-content>
+
+                    </md-card>
+                </div>
+
+                <div class="md-layout-item md-size-100">
+                    <md-card>
+                        <md-card-header class="md-card-header-icon md-card-header-primary">
+                            <div class="card-icon">
+                                <md-icon>assignment</md-icon>
+                            </div>
+                            <h4 class="title">Temperature Types</h4>
+                        </md-card-header>
+                        <md-card-content>
+                            <div class="text-right">
+                                <md-card-content>
+                                    <div class="md-layout md-gutter">
+                                        <div class="md-layout-item md-small-size-100 md-size-30">
+                                            <md-field>
+                                                <label>Add Temperature Type</label>
+                                                <md-input v-model='type'></md-input>
+                                                <md-button class="md-primary md-dense" @click="addType('temperature')">
+                                                    Add Campaign
+                                                </md-button>
+                                            </md-field>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                            </div>
+                            <md-table
+                                :value="leadStatuses.temperature.data"
+                                :md-sort.sync="sortation.field"
+                                :md-sort-order.sync="sortation.order"
+                                :md-sort-fn="customSort"
+                                class="paginated-table table-striped table-hover"
+                            >
+                                <md-table-row slot="md-table-row" slot-scope="{ item }">
+                                    <md-table-cell md-label="Name" md-sort-by="name">{{item.temperature_type}}</md-table-cell>
+                                    <md-table-cell md-label="Created At" md-sort-by="created_at">{{item.created_at}}</md-table-cell>
+                                    <md-table-cell md-label="Actions">
+                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>edit</md-icon>
+                                        </md-button>
+                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
+                                            <md-icon>delete</md-icon>
+                                        </md-button>
+                                    </md-table-cell>
+                                </md-table-row>
+                            </md-table>
+                        </md-card-content>
+
+                    </md-card>
+                </div>
+            </md-card>
+        </div>
+
+
+
+        <div class="md-layout-item md-size-50">
+            <md-card>
+                <div class="md-layout-item md-size-100">
+                    <md-card>
+                        <md-card-header class="md-card-header-icon md-card-header-blue">
+                            <div class="card-icon">
+                                <md-icon>assignment</md-icon>
+                            </div>
                             <h4 class="title">Campaign List</h4>
                         </md-card-header>
                         <md-card-content>
@@ -442,6 +646,7 @@ export default {
         footerTable: ["Name", "Email", "Created At", "Actions"],
         footerTypeTable: ["Type","Created At", "Actions"],
         campaignName: '',
+        marketName:'',
         type:'',
         query: null,
 
@@ -463,7 +668,8 @@ export default {
     computed: {
         ...mapGetters({
             campaignTypes: 'campaignTypes',
-            leadStatuses: 'leadStatuses'
+            leadStatuses: 'leadStatuses',
+            markets: 'markets'
         }),
 
         sort() {
@@ -495,6 +701,7 @@ export default {
     methods: {
 
         async getList() {
+            await this.$store.dispatch("getAllMarkets")
             await this.$store.dispatch("getCampaignTypes")
             await this.$store.dispatch("getLeadStatuses")
             this.table = [{
@@ -510,6 +717,11 @@ export default {
                 .catch(err => console.log(err))
         },
 
+        addMarket(){
+            this.$store.dispatch('postMarket', {'market': this.marketName})
+                .then(() => this.$router.go())
+                .catch(err => console.log(err))
+        },
         onProFeature() {
             this.$store.dispatch("alerts/error", "This is a PRO feature.")
         },

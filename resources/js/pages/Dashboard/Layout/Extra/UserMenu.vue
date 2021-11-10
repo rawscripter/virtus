@@ -22,7 +22,7 @@
 
       <collapse-transition>
         <div v-show="!isClosed">
-          <ul class="nav">
+          <ul class="nav nav-profile">
             <slot>
               <li>
                 <a v-if="$route.meta.rtlActive" @click="goToProfile">
@@ -78,7 +78,7 @@ export default {
       this.isClosed = !this.isClosed;
     },
     goToProfile() {
-      this.$router.push({name: "User Profile"})
+      this.$router.push({name: "UserResource Profile"})
     },
     logout() {
       this.$store.dispatch("logout");
@@ -89,5 +89,9 @@ export default {
 <style>
 .collapsed {
   transition: opacity 1s;
+}
+
+.nav-profile{
+    display: block !important;
 }
 </style>

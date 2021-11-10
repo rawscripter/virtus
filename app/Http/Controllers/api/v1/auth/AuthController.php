@@ -3,6 +3,7 @@ namespace App\Http\Controllers\api\v1\auth;
 
 
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use CloudCreativity\LaravelJsonApi\Document\Error;
 use GuzzleHttp\Client;
@@ -21,11 +22,11 @@ class AuthController
 
         if(Auth::attempt($login)) {
             $user = User::where('username', $login['username'])->first();
-
+            $user['full_name']= $user->first_name. ' '. $user->last_name;
             if ($user) {
                 return $this->getToken($login, $user);
             } else {
-                return response(['status' => 'error', 'message' => 'User not found'], 401);
+                return response(['status' => 'error', 'message' => 'UserResource not found'], 401);
             }
         }
 

@@ -22,8 +22,7 @@
                                 :md-sort.sync="sortation.field"
                                 :md-sort-order.sync="sortation.order"
                                 :md-sort-fn="customSort"
-                                class="paginated-table table-striped table-hover"
-                            >
+                                class="paginated-table table-striped table-hover">
                                 <md-table-row slot="md-table-row" slot-scope="{ item}">
                                     <md-table-cell md-label="Campaign" md-sort-by="name">{{item.name}} ({{item.size}})</md-table-cell>
                                     <md-table-cell md-label="Actions">
@@ -36,53 +35,54 @@
                         </div>
                         <div class="md-layout-item md-size-75">
                             <div v-if="table.length>0">
-                            <md-table
-                                :value="table"
-                                :md-sort.sync="sortation.field"
-                                :md-sort-order.sync="sortation.order"
-                                :md-sort-fn="customSort"
-                                class="paginated-table table-striped table-hover"
-                            >
-                                <md-table-toolbar>
+                                <md-table
+                                    :value="table"
+                                    :md-sort.sync="sortation.field"
+                                    :md-sort-order.sync="sortation.order"
+                                    :md-sort-fn="customSort"
+                                    class="paginated-table table-striped table-hover"
+                                >
+                                    <md-table-toolbar>
 
-                                    <md-field>
-                                        <label>Per page</label>
-                                        <md-select v-model="pagination.perPage" name="pages">
-                                            <md-option
-                                                v-for="item in pagination.perPageOptions"
-                                                :key="item"
-                                                :label="item"
-                                                :value="item"
-                                            >
-                                                {{ item }}
-                                            </md-option>
-                                        </md-select>
-                                    </md-field>
+                                        <md-field>
+                                            <label>Per page</label>
+                                            <md-select v-model="pagination.perPage" name="pages">
+                                                <md-option
+                                                    v-for="item in pagination.perPageOptions"
+                                                    :key="item"
+                                                    :label="item"
+                                                    :value="item"
+                                                >
+                                                    {{ item }}
+                                                </md-option>
+                                            </md-select>
+                                        </md-field>
 
-                                </md-table-toolbar>
+                                    </md-table-toolbar>
 
-                                <md-table-row slot="md-table-row" slot-scope="{ item}">
-                                    <md-table-cell md-label="First Name" md-sort-by="first_name">{{item.contact.first_name}}</md-table-cell>
-                                    <md-table-cell md-label="Last Name" md-sort-by="last_name">{{item.contact.last_name}}</md-table-cell>
-                                    <md-table-cell md-label="Address" md-sort-by="address">{{item.addresses[0][0]["full_address"]}}</md-table-cell>
-                                    <md-table-cell md-label="Properties" md-sort-by="properties">{{item.addresses.length}}</md-table-cell>
-                                    <md-table-cell md-label="Best Number" md-sort-by="phone_number #">{{item.phones[0][0]["phone"]}}</md-table-cell>
-                                    <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
-                                    <md-table-cell md-label="Actions">
-                                        <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
-                                            <md-icon>edit</md-icon>
-                                        </md-button>
-                                        <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
-                                            <md-icon>delete</md-icon>
-                                        </md-button>
-                                    </md-table-cell>
-                                </md-table-row>
-                            </md-table>
-                                </div>
+                                    <md-table-row slot="md-table-row" slot-scope="{ item}">
+                                        <md-table-cell md-label="First Name" md-sort-by="first_name">{{item.contact.first_name}}</md-table-cell>
+                                        <md-table-cell md-label="Last Name" md-sort-by="last_name">{{item.contact.last_name}}</md-table-cell>
+                                        <md-table-cell md-label="Address" md-sort-by="address">{{item.addresses[0][0]["full_address"]}}</md-table-cell>
+                                        <md-table-cell md-label="Properties" md-sort-by="properties">{{item.addresses.length}}</md-table-cell>
+                                        <md-table-cell md-label="Best Number" md-sort-by="phone_number #">{{item.phones[0][0]["phone"]}}</md-table-cell>
+                                        <md-table-cell md-label="Phone Tag" md-sort-by="tag #">{{item.phones[0][0]["phone_tag"]}}</md-table-cell>
+                                        <md-table-cell md-label="Updated Date" md-sort-by="created_at">{{item.updated}}</md-table-cell>
+                                        <md-table-cell md-label="Actions">
+                                            <md-button class="md-icon-button md-raised md-round md-info" @click="onEdit(item)" style="margin: .2rem;">
+                                                <md-icon>edit</md-icon>
+                                            </md-button>
+                                            <md-button class="md-icon-button md-raised md-round md-danger" @click="onProFeature" style="margin: .2rem;">
+                                                <md-icon>delete</md-icon>
+                                            </md-button>
+                                        </md-table-cell>
+                                    </md-table-row>
+                                </md-table>
+                            </div>
                             <div v-else>
-                             <h3>
-                                 <strong>{{activeCampaign}}  Has No Leads</strong>
-                             </h3>
+                                <h3>
+                                    <strong>{{activeCampaign}}  Has No Leads</strong>
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -238,14 +238,8 @@ export default {
 
     async created() {
         await this.$store.dispatch("getAllCampaigns");
+        await this.$store.dispatch("getAllMarkets");
         await this.$store.dispatch('searchContactByOwner', {perPage: this.pagination.perPage, query:'', page:this.pagination.currentPage});
-        console.log("should do search now")
-        Echo.channel('search')
-            .listen('.searchResults', (e) => {
-                console.log('results listening' + e)
-                this.$store.commit('SET_CAMPAIGN_CONTACTS', e.campaignContacts)
-            })
-
     },
 }
 

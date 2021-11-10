@@ -26,6 +26,42 @@ export default {
         });
     },
 
+    getAllAddresses(context){
+        Client.get('/property/addresses').then(function (response) {
+            if(response.data!="") {
+                context.commit('ADDRESSES', response.data);
+            }else{
+                console.log("response data empty");
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    getAllOwners(context){
+        Client.get('/owners/all').then(function (response) {
+            if(response.data!="") {
+                context.commit('OWNERS', response.data);
+            }else{
+                console.log("response data empty");
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    getAllMarkets(context){
+        Client.get('/campaign/market/all').then(function (response) {
+            if(response.data!="") {
+                context.commit('MARKETS', response.data.data);
+            }else{
+                console.log("response data empty");
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
     getCampaignById (context, id) {
         Client.get('/campaign/id?id='+id).then(function (response) {
             if(response.data!="") {
@@ -42,6 +78,10 @@ export default {
         context.commit('SET_ACTIVE_CONTACT', payload);
     },
 
+    search(context,payload) {
+        Client.get('search/any?query='+payload.query + '&perPage=' + payload.perPage +'&type=' + payload.type);
+    },
+
     searchContactByCampaign (context,payload) {
         Client.get('campaign/contacts/search/campaign?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
             if(response.data!="") {
@@ -56,7 +96,7 @@ export default {
 
 
     searchContactByOwner (context,payload) {
-        Client.get('campaign/contacts/search/owner?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
+        Client.get('owners/filter?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
             if(response.data!="") {
                 context.commit('SET_CAMPAIGN_CONTACTS', response.data);
             }else{
@@ -69,7 +109,7 @@ export default {
 
 
     searchContactByAddress (context,payload) {
-        Client.get('campaign/contacts/search/address?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
+        Client.get('property/addresses/filter?query='+payload.query + '&perPage=' + payload.perPage + '&page=' + payload.page).then(function (response) {
             if(response.data!="") {
                 context.commit('SET_CAMPAIGN_CONTACTS', response.data);
             }else{
@@ -132,6 +172,21 @@ export default {
         }.bind(this))
             .catch(function(response){
                 context.commit('CAMPAIGN_TYPE_LOADED', true);
+            });
+    },
+
+    postMarket(context, data) {
+        /*
+          Make the request to the POST /single-file URL
+        */
+        Client.post( 'campaign/market/create', data
+        ).then(function(response){
+            this.$router.push({name: 'campaign-list'});
+            context.commit('MARKETS_LOADED', true);
+
+        }.bind(this))
+            .catch(function(response){
+                context.commit('MARKETS_LOADED', true);
             });
     },
 

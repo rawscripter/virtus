@@ -26,7 +26,8 @@ class PropertyAddressResource extends JsonResource
                 'details'=> new PropertyDetailResource($this->details),
                 'owners' =>  $this->owners,
                 'created' => $this->created_at,
-                'updated' => $this->updated_at
+                'updated' => $this->updated_at,
+                'market' => $this->markets,
             ],
         ];
     }
